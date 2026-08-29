@@ -145,8 +145,8 @@ footer a{color:var(--sky);cursor:pointer;text-decoration:underline;text-underlin
 #gate p{font-family:"Permanent Marker",cursive;color:var(--chalk);font-size:16px;line-height:1.55;max-width:24em;margin-bottom:14px}
 #gate .soon{display:inline-block;margin-top:6px;background:var(--mag);color:#fff;border:2px solid #000;
   box-shadow:4px 4px 0 #000;padding:10px 16px;font-family:"Permanent Marker",cursive;font-size:15px;transform:rotate(-1.5deg)}
-#gate .esc{margin-top:26px;background:none;border:none;color:var(--chalk);opacity:.35;
-  font:600 12px Rubik;text-decoration:underline;cursor:pointer}
+#gate .gsup{margin-top:28px;font:600 12px Rubik;color:var(--chalk);opacity:.55;letter-spacing:.03em}
+#gate .gsup a{color:var(--lime);text-decoration:underline;text-underline-offset:3px}
 
 /* ---------- MOBILE ---------- */
 button,.step,.tier,.play{-webkit-tap-highlight-color:transparent;touch-action:manipulation;-webkit-user-select:none;user-select:none}
@@ -206,9 +206,9 @@ body.ios .iosnote{display:block}
   </svg>
   <h2>NICHT AUF<br>DEM HANDY</h2>
   <p>Leider klappt es hier noch nicht.<br>Spiel es am PC, Laptop oder iPad.</p>
-  <p>Wir arbeiten dran.</p>
+  <p>Die Handy-Version kommt — wir arbeiten dran.</p>
   <div class="soon">COMING SOON · SUMMER 2027</div>
-  <button class="esc" id="esc">Trotzdem versuchen</button>
+  <div class="gsup">Fragen? <a href="mailto:support@spraylist.party">support@spraylist.party</a></div>
 </div>
 <div class="wrap">
   <header>
@@ -368,16 +368,19 @@ const norm=s=>s.toLowerCase().replace(/\(.*?\)|\[.*?\]|feat\..*|ft\..*|- .*remas
 /* ---------- Handy-Sperre (BLOCK_MOBILE=false schaltet sie ab) ---------- */
 const BLOCK_MOBILE=true;
 const coarse=()=>window.matchMedia&&window.matchMedia("(pointer:coarse)").matches;
-const isPhone=()=>Math.min(window.innerWidth,window.innerHeight)<500&&navigator.maxTouchPoints>0&&coarse();
-if(BLOCK_MOBILE&&isPhone()&&!sessionStorage.getItem("spl_esc")){
-  document.getElementById("gate").classList.add("on");
-  document.documentElement.style.overflow="hidden";
+const uaPhone=()=>/Android.*Mobile|iPhone|iPod|Windows Phone|BlackBerry|Opera Mini|IEMobile/i.test(navigator.userAgent);
+const smallTouch=()=>Math.min(window.innerWidth,window.innerHeight)<500&&navigator.maxTouchPoints>0&&coarse();
+const isPhone=()=>uaPhone()||smallTouch();
+function gateCheck(){
+  if(!BLOCK_MOBILE)return;
+  const on=isPhone();
+  document.getElementById("gate").classList.toggle("on",on);
+  document.documentElement.style.overflow=on?"hidden":"";
+  if(on){try{stopAudio()}catch(e){}}
 }
-document.getElementById("esc").onclick=()=>{
-  try{sessionStorage.setItem("spl_esc","1")}catch(e){}
-  document.getElementById("gate").classList.remove("on");
-  document.documentElement.style.overflow="";
-};
+gateCheck();
+window.addEventListener("resize",gateCheck);
+window.addEventListener("orientationchange",gateCheck);
 
 const $=id=>document.getElementById(id);
 let region="de",tier="easy",songs=[],idx=0,total=0,log=[],cur=null,stepI=0,stepMax=0,penalty=0,done=false;
