@@ -130,6 +130,20 @@ footer a{color:var(--sky);cursor:pointer;text-decoration:underline;text-underlin
 .box .close{margin-top:10px}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 
+
+/* ---------- Handy-Sperre ---------- */
+#gate{position:fixed;inset:0;z-index:999;background:var(--ink);display:none;
+  flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:28px 22px;gap:0}
+#gate.on{display:flex}
+#gate .gcan{width:52px;height:76px;transform:rotate(-8deg);margin-bottom:18px}
+#gate h2{font-family:"Rubik Spray Paint",cursive;font-size:clamp(30px,10vw,44px);color:var(--lime);
+  text-shadow:3px 3px 0 var(--mag),-1px -1px 0 #000;transform:rotate(-2deg);line-height:1.05;margin-bottom:20px}
+#gate p{font-family:"Permanent Marker",cursive;color:var(--chalk);font-size:16px;line-height:1.55;max-width:24em;margin-bottom:14px}
+#gate .soon{display:inline-block;margin-top:6px;background:var(--mag);color:#fff;border:2px solid #000;
+  box-shadow:4px 4px 0 #000;padding:10px 16px;font-family:"Permanent Marker",cursive;font-size:15px;transform:rotate(-1.5deg)}
+#gate .esc{margin-top:26px;background:none;border:none;color:var(--chalk);opacity:.35;
+  font:600 12px Rubik;text-decoration:underline;cursor:pointer}
+
 /* ---------- MOBILE ---------- */
 button,.step,.tier,.play{-webkit-tap-highlight-color:transparent;touch-action:manipulation;-webkit-user-select:none;user-select:none}
 @supports(min-height:100dvh){.wrap{min-height:100dvh}}
@@ -178,6 +192,20 @@ body.ios .iosnote{display:block}
 </style>
 </head>
 <body>
+<div id="gate">
+  <svg class="gcan" viewBox="0 0 34 50" aria-hidden="true">
+    <rect x="15" y="6" width="7" height="4" fill="#9a9a9a" stroke="#000" stroke-width="1.6"/>
+    <rect x="8" y="9" width="11" height="5" fill="#ff2fb4" stroke="#000" stroke-width="1.8"/>
+    <rect x="5" y="14" width="17" height="32" rx="2" fill="#c6ff3d" stroke="#000" stroke-width="1.8"/>
+    <rect x="5" y="24" width="17" height="8" fill="#ff8a1f" stroke="#000" stroke-width="1.8"/>
+    <circle cx="13.5" cy="39" r="3" fill="#1b1b1f" stroke="#000" stroke-width="1.4"/>
+  </svg>
+  <h2>NICHT AUF<br>DEM HANDY</h2>
+  <p>Leider klappt es hier noch nicht.<br>Spiel es am PC, Laptop oder iPad.</p>
+  <p>Wir arbeiten dran.</p>
+  <div class="soon">COMING SOON · SUMMER 2027</div>
+  <button class="esc" id="esc">Trotzdem versuchen</button>
+</div>
 <div class="wrap">
   <header>
     <div class="hrow" style="display:flex;align-items:center;gap:14px"><div class="brand-wrap"><svg class="can" viewBox="0 0 34 50" aria-hidden="true">
@@ -305,12 +333,19 @@ function cacheSave(){clearTimeout(cSaveT);cSaveT=setTimeout(()=>{
 const slim=r=>({trackName:r.trackName,artistName:r.artistName,previewUrl:r.previewUrl,
   trackViewUrl:r.trackViewUrl,artworkUrl100:r.artworkUrl100,artworkUrl60:r.artworkUrl60});
 
-const RL={hits:[],q:[],busy:false};
+const RLK="spl_rl_v1";
+function rlLoad(){try{const d=JSON.parse(localStorage.getItem(RLK)||"{}");return{hits:d.hits||[],until:d.until||0}}catch(e){return{hits:[],until:0}}}
+function rlSave(){try{localStorage.setItem(RLK,JSON.stringify({hits:RL.hits.slice(-30),until:RL.until}))}catch(e){}}
+const _rl=rlLoad();
+const RL={hits:_rl.hits,until:_rl.until,q:[],busy:false};
+const blockedFor=()=>Math.max(0,Math.ceil((RL.until-Date.now())/1000));
+function markBlocked(){RL.until=Date.now()+75000;rlSave()}
 function pump(){
   if(RL.busy||!RL.q.length)return;
   const now=Date.now();RL.hits=RL.hits.filter(t=>now-t<60000);
+  if(RL.until>now){RL.busy=true;setTimeout(()=>{RL.busy=false;pump()},RL.until-now+200);return}
   if(RL.hits.length>=14){RL.busy=true;setTimeout(()=>{RL.busy=false;pump()},60000-(now-RL.hits[0])+300);return}
-  const job=RL.q.shift();RL.hits.push(now);RL.busy=true;
+  const job=RL.q.shift();RL.hits.push(now);rlSave();RL.busy=true;
   job.fn().then(job.res,job.rej).then(()=>{setTimeout(()=>{RL.busy=false;pump()},320)});
 }
 const queued=fn=>new Promise((res,rej)=>{RL.q.push({fn,res,rej});pump()});
@@ -319,10 +354,26 @@ function search(q,limit=6){
   const key=q.toLowerCase()+"|"+limit;
   if(CACHE[key])return Promise.resolve(CACHE[key]);
   return queued(()=>jsonp(`https://itunes.apple.com/search?term=${encodeURIComponent(q)}&media=music&entity=song&limit=${limit}&country=de`))
-    .then(d=>{const r=(d.results||[]).map(slim);CACHE[key]=r;cacheSave();return r});
+    .then(d=>{const r=(d.results||[]).map(slim);CACHE[key]=r;cacheSave();return r},
+          e=>{if(e&&e.message==="jsonp")markBlocked();throw e});
 }
 const cached=(q,limit=6)=>!!CACHE[q.toLowerCase()+"|"+limit];
 const norm=s=>s.toLowerCase().replace(/\(.*?\)|\[.*?\]|feat\..*|ft\..*|- .*remaster.*|- .*version.*|- .*edit.*/g,"").replace(/[^a-z0-9äöüß]+/g," ").trim();
+
+
+/* ---------- Handy-Sperre (BLOCK_MOBILE=false schaltet sie ab) ---------- */
+const BLOCK_MOBILE=true;
+const coarse=()=>window.matchMedia&&window.matchMedia("(pointer:coarse)").matches;
+const isPhone=()=>Math.min(window.innerWidth,window.innerHeight)<500&&navigator.maxTouchPoints>0&&coarse();
+if(BLOCK_MOBILE&&isPhone()&&!sessionStorage.getItem("spl_esc")){
+  document.getElementById("gate").classList.add("on");
+  document.documentElement.style.overflow="hidden";
+}
+document.getElementById("esc").onclick=()=>{
+  try{sessionStorage.setItem("spl_esc","1")}catch(e){}
+  document.getElementById("gate").classList.remove("on");
+  document.documentElement.style.overflow="";
+};
 
 const $=id=>document.getElementById(id);
 let region="de",tier="easy",songs=[],idx=0,total=0,log=[],cur=null,stepI=0,stepMax=0,penalty=0,done=false;
@@ -436,9 +487,16 @@ $("impclose").onclick=()=>$("modal").classList.remove("open");
 $("modal").addEventListener("click",e=>{if(e.target===$("modal"))$("modal").classList.remove("open")});
 
 function loadMsg(t){$("load").innerHTML=t}
+let cdT=null;
 function loadFail(t){
+  clearInterval(cdT);
   $("load").innerHTML=t+'<div class="retry"><button class="btn" id="retry">Nochmal versuchen</button></div>';
-  $("retry").onclick=loadTier;
+  const btn=$("retry");btn.onclick=()=>{clearInterval(cdT);loadTier()};
+  const tick=()=>{const s=blockedFor();
+    if(s>0){btn.disabled=true;btn.style.opacity=".5";btn.textContent=`Noch ${s} s warten`}
+    else{clearInterval(cdT);btn.disabled=false;btn.style.opacity="";btn.textContent="Nochmal versuchen";
+      if(!document.hidden)loadTier()}};
+  tick();if(blockedFor()>0)cdT=setInterval(tick,1000);
 }
 async function loadTier(){
   stopAudio();
@@ -491,7 +549,7 @@ function play(){stepMax=Math.max(stepMax,stepI);renderSteps();updateWorth();play
 $("play").onclick=()=>!done&&play();
 let deb=null,list=[],hl=-1;
 $("inp").addEventListener("input",()=>{clearTimeout(deb);const q=$("inp").value.trim();if(q.length<3){$("sugg").classList.remove("open");return}
-  deb=setTimeout(async()=>{try{list=(await search(q,6)).filter(x=>x.trackName)}catch(e){return}hl=-1;
+  deb=setTimeout(async()=>{if(blockedFor()>0)return;try{list=(await search(q,6)).filter(x=>x.trackName)}catch(e){return}hl=-1;
     $("sugg").innerHTML=list.map((x,i)=>`<button data-i="${i}"><img src="${x.artworkUrl60}" alt=""><div>${x.trackName}<small>${x.artistName}</small></div></button>`).join("");
     $("sugg").classList.toggle("open",list.length>0)},450)});
 $("inp").addEventListener("keydown",e=>{if(!$("sugg").classList.contains("open"))return;
