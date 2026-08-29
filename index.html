@@ -136,6 +136,7 @@ button,.step,.tier,.play{-webkit-tap-highlight-color:transparent;touch-action:ma
 .iosnote{display:none;font-size:12px;color:var(--org);font-weight:700;line-height:1.4}
 body.ios .iosnote{display:block}
 .retry{margin-top:14px}
+.diag{display:block;margin-top:10px;opacity:.5;font-size:11px;letter-spacing:.05em}
 @media (max-width:620px){
   .wrap{padding:14px 12px calc(24px + env(safe-area-inset-bottom))}
   header{flex-direction:column;align-items:stretch;gap:10px;margin-bottom:10px}
@@ -286,7 +287,7 @@ impossible:["Have a Nice Life|Bloodhail","Xiu Xiu|I Luv the Valley OH!","Death G
 const STEPS=[0.1,0.3,0.5,1,2,3,5,10,15,30];
 const worthOf=t=>Math.round(3500+6500*(1-Math.log10(t*10)/Math.log10(300)));
 const fmt=n=>n.toLocaleString("de-DE"),sec=t=>String(t).replace(".",",")+" s";
-function jsonp(url,ms=9000){return new Promise((res,rej)=>{
+function jsonp(url,ms=15000){return new Promise((res,rej)=>{
   const cb="cb_"+Math.random().toString(36).slice(2);
   const s=document.createElement("script");
   const t=setTimeout(()=>{clean();rej(new Error("timeout"))},ms);
@@ -444,7 +445,7 @@ async function loadTier(){
   $("load").classList.remove("hidden");$("game").classList.add("hidden");$("result").classList.add("hidden");
   const pool=[...POOLS[region][tier]].sort(()=>Math.random()-.5).slice(0,12)
     .sort((a,b)=>(cached(a.replace("|"," "))?0:1)-(cached(b.replace("|"," "))?0:1));
-  const found=[],seen=new Set();let fails=0;
+  const found=[],seen=new Set();let fails=0;const why={timeout:0,jsonp:0};
   for(const p of pool){
     if(found.length>=5)break;
     loadMsg(`Songs werden gesucht…<br><small>${found.length} / 5</small>`);
@@ -455,11 +456,16 @@ async function loadTier(){
       if(h&&!seen.has(norm(h.trackName))){seen.add(norm(h.trackName));
         found.push({artist:h.artistName,title:h.trackName,key:norm(h.trackName),akey:norm(h.artistName),
           url:h.previewUrl,link:h.trackViewUrl||"",art:(h.artworkUrl100||"").replace("100x100","300x300")});}
-    }catch(e){fails++;if(fails>=4)break}
+    }catch(e){why[e&&e.message==="timeout"?"timeout":"jsonp"]++;fails++;
+      if(fails===1){await new Promise(r=>setTimeout(r,1200))}
+      if(fails>=4)break}
   }
   songs=found;idx=0;total=0;log=[];$("total").textContent="0";
   if(!songs.length){
-    loadFail(fails?'Apple liefert gerade keine Songs.<br><small>Es wurde zu oft hintereinander gesucht. Warte etwa eine Minute, dann geht es wieder.</small>'
+    const diag=why.timeout>why.jsonp
+      ? 'Die Anfragen laufen ins Leere.<br><small>Sieht nach langsamer oder gefilterter Verbindung aus (Werbeblocker, Schul-WLAN, VPN?).</small>'
+      : 'Apple blockt die Anfragen gerade.<br><small>Meist das Anfragelimit. Warte etwa eine Minute, dann geht es wieder.</small>';
+    loadFail(fails?diag+`<small class="diag">Timeouts: ${why.timeout} · Blockiert: ${why.jsonp}</small>`
                   :'Keine Songs gefunden.<br><small>Probier eine andere Kategorie.</small>');
     return;}
   loadMsg("Snippet wird vorbereitet…");
