@@ -294,7 +294,33 @@ function jsonp(url,ms=9000){return new Promise((res,rej)=>{
   window[cb]=d=>{clean();res(d)};
   s.src=url+"&callback="+cb;s.onerror=()=>{clean();rej(new Error("jsonp"))};
   document.head.appendChild(s)})}
-const search=(q,limit=6)=>jsonp(`https://itunes.apple.com/search?term=${encodeURIComponent(q)}&media=music&entity=song&limit=${limit}&country=de`).then(d=>d.results||[]);
+/* ---- Cache + Rate-Limit: Apple erlaubt nur ~20 Anfragen/Minute pro IP ---- */
+const CK="spl_cache_v2";
+let CACHE={};try{CACHE=JSON.parse(localStorage.getItem(CK)||"{}")}catch(e){CACHE={}}
+let cSaveT=null;
+function cacheSave(){clearTimeout(cSaveT);cSaveT=setTimeout(()=>{
+  try{const k=Object.keys(CACHE);if(k.length>500)k.slice(0,k.length-400).forEach(x=>delete CACHE[x]);
+  localStorage.setItem(CK,JSON.stringify(CACHE))}catch(e){}},500)}
+const slim=r=>({trackName:r.trackName,artistName:r.artistName,previewUrl:r.previewUrl,
+  trackViewUrl:r.trackViewUrl,artworkUrl100:r.artworkUrl100,artworkUrl60:r.artworkUrl60});
+
+const RL={hits:[],q:[],busy:false};
+function pump(){
+  if(RL.busy||!RL.q.length)return;
+  const now=Date.now();RL.hits=RL.hits.filter(t=>now-t<60000);
+  if(RL.hits.length>=14){RL.busy=true;setTimeout(()=>{RL.busy=false;pump()},60000-(now-RL.hits[0])+300);return}
+  const job=RL.q.shift();RL.hits.push(now);RL.busy=true;
+  job.fn().then(job.res,job.rej).then(()=>{setTimeout(()=>{RL.busy=false;pump()},320)});
+}
+const queued=fn=>new Promise((res,rej)=>{RL.q.push({fn,res,rej});pump()});
+
+function search(q,limit=6){
+  const key=q.toLowerCase()+"|"+limit;
+  if(CACHE[key])return Promise.resolve(CACHE[key]);
+  return queued(()=>jsonp(`https://itunes.apple.com/search?term=${encodeURIComponent(q)}&media=music&entity=song&limit=${limit}&country=de`))
+    .then(d=>{const r=(d.results||[]).map(slim);CACHE[key]=r;cacheSave();return r});
+}
+const cached=(q,limit=6)=>!!CACHE[q.toLowerCase()+"|"+limit];
 const norm=s=>s.toLowerCase().replace(/\(.*?\)|\[.*?\]|feat\..*|ft\..*|- .*remaster.*|- .*version.*|- .*edit.*/g,"").replace(/[^a-z0-9äöüß]+/g," ").trim();
 
 const $=id=>document.getElementById(id);
@@ -416,24 +442,29 @@ function loadFail(t){
 async function loadTier(){
   stopAudio();
   $("load").classList.remove("hidden");$("game").classList.add("hidden");$("result").classList.add("hidden");
-  loadMsg("Songs werden gesucht…");
-  const pick=[...POOLS[region][tier]].sort(()=>Math.random()-.5).slice(0,10);
-  const hits=await Promise.all(pick.map(p=>{
+  const pool=[...POOLS[region][tier]].sort(()=>Math.random()-.5).slice(0,12)
+    .sort((a,b)=>(cached(a.replace("|"," "))?0:1)-(cached(b.replace("|"," "))?0:1));
+  const found=[],seen=new Set();let fails=0;
+  for(const p of pool){
+    if(found.length>=5)break;
+    loadMsg(`Songs werden gesucht…<br><small>${found.length} / 5</small>`);
     const [artist,title]=p.split("|");
-    return search(`${artist} ${title}`,5).then(r=>{
+    try{
+      const r=await search(`${artist} ${title}`,5);
       const h=r.find(x=>x.previewUrl&&norm(x.trackName).includes(norm(title).split(" ")[0]))||r.find(x=>x.previewUrl);
-      if(!h)return null;
-      return {artist:h.artistName,title:h.trackName,key:norm(h.trackName),akey:norm(h.artistName),
-        url:h.previewUrl,link:h.trackViewUrl||"",art:(h.artworkUrl100||"").replace("100x100","300x300")};
-    }).catch(()=>null);
-  }));
-  const seen=new Set();
-  songs=hits.filter(s=>s&&!seen.has(s.key)&&seen.add(s.key)).slice(0,5);
-  idx=0;total=0;log=[];$("total").textContent="0";
-  if(!songs.length){loadFail("Keine Songs geladen.<br>Internetverbindung prüfen.");return}
+      if(h&&!seen.has(norm(h.trackName))){seen.add(norm(h.trackName));
+        found.push({artist:h.artistName,title:h.trackName,key:norm(h.trackName),akey:norm(h.artistName),
+          url:h.previewUrl,link:h.trackViewUrl||"",art:(h.artworkUrl100||"").replace("100x100","300x300")});}
+    }catch(e){fails++;if(fails>=4)break}
+  }
+  songs=found;idx=0;total=0;log=[];$("total").textContent="0";
+  if(!songs.length){
+    loadFail(fails?'Apple liefert gerade keine Songs.<br><small>Es wurde zu oft hintereinander gesucht. Warte etwa eine Minute, dann geht es wieder.</small>'
+                  :'Keine Songs gefunden.<br><small>Probier eine andere Kategorie.</small>');
+    return;}
   loadMsg("Snippet wird vorbereitet…");
   await prepare(songs[0]);
-  songs.slice(1).reduce((p,s)=>p.then(()=>prepare(s)),Promise.resolve());
+  songs.slice(1).reduce((p,x)=>p.then(()=>prepare(x)),Promise.resolve());
   $("load").classList.add("hidden");$("game").classList.remove("hidden");startRound();
 }
 function startRound(){
@@ -453,10 +484,10 @@ $("steps").addEventListener("click",e=>{const t=e.target.closest(".step");if(!t|
 function play(){stepMax=Math.max(stepMax,stepI);renderSteps();updateWorth();playSnippet(STEPS[stepI])}
 $("play").onclick=()=>!done&&play();
 let deb=null,list=[],hl=-1;
-$("inp").addEventListener("input",()=>{clearTimeout(deb);const q=$("inp").value.trim();if(q.length<2){$("sugg").classList.remove("open");return}
-  deb=setTimeout(async()=>{list=(await search(q,6)).filter(x=>x.trackName);hl=-1;
+$("inp").addEventListener("input",()=>{clearTimeout(deb);const q=$("inp").value.trim();if(q.length<3){$("sugg").classList.remove("open");return}
+  deb=setTimeout(async()=>{try{list=(await search(q,6)).filter(x=>x.trackName)}catch(e){return}hl=-1;
     $("sugg").innerHTML=list.map((x,i)=>`<button data-i="${i}"><img src="${x.artworkUrl60}" alt=""><div>${x.trackName}<small>${x.artistName}</small></div></button>`).join("");
-    $("sugg").classList.toggle("open",list.length>0)},260)});
+    $("sugg").classList.toggle("open",list.length>0)},450)});
 $("inp").addEventListener("keydown",e=>{if(!$("sugg").classList.contains("open"))return;
   if(e.key==="ArrowDown")hl=Math.min(hl+1,list.length-1);else if(e.key==="ArrowUp")hl=Math.max(hl-1,0);
   else if(e.key==="Enter"){e.preventDefault();guess(list[Math.max(hl,0)]);return}else return;
