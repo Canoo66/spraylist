@@ -113,7 +113,30 @@ footer a{color:var(--sky);cursor:pointer;text-decoration:underline;text-underlin
 .modal{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,.75);display:none;place-items:center;padding:20px}
 .modal.open{display:grid}
 .modal .box{background:var(--chalk);color:#111;border:3px solid #000;box-shadow:8px 8px 0 var(--mag);padding:26px;width:min(520px,100%);max-height:90vh;overflow:auto;transform:rotate(-1deg)}
-.box h2{font-family:"Rubik Spray Paint",cursive;font-size:32px;margin-bottom:14px}
+/* Impressum-Kopf mit Sprühdose */
+.box .imphead{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+.box .can{flex:0 0 auto;width:46px;height:auto;animation:canFloat 3.4s ease-in-out infinite;transform-origin:50% 100%}
+@keyframes canFloat{
+ 0%,100%{transform:translateY(0) rotate(-6deg)}
+ 50%{transform:translateY(-7px) rotate(-2deg)}}
+.box .can .mist{animation:mistPuff 3.4s ease-in-out infinite}
+@keyframes mistPuff{
+ 0%,100%{opacity:.25;transform:translate(0,0) scale(.85)}
+ 50%{opacity:1;transform:translate(3px,-3px) scale(1.12)}}
+.box h2{font-family:Bangers,cursive;font-weight:400;font-size:44px;line-height:.9;letter-spacing:.03em;
+  color:var(--chalk);-webkit-text-stroke:2px #000;
+  text-shadow:3px 3px 0 var(--mag),6px 6px 0 #000;transform:rotate(-2deg);margin:0}
+.box .impsub{font:900 10px Rubik;letter-spacing:.22em;text-transform:uppercase;color:#777;margin-top:6px}
+/* Kontakt-Buttons */
+.box .clinks{display:flex;flex-wrap:wrap;gap:10px;margin:4px 0 14px}
+.box .clink{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border:2px solid #000;
+  background:#fff;color:#111;font:900 13px Rubik;text-decoration:none;box-shadow:3px 3px 0 #000;transition:.12s}
+.box .clink:hover{transform:translate(-1px,-1px);box-shadow:4px 4px 0 #000}
+.box .clink:active{transform:translate(2px,2px);box-shadow:1px 1px 0 #000}
+.box .clink.mail{background:var(--lime)}
+.box .clink.dc{background:var(--sky)}
+.box .clink small{display:block;font:500 10px Rubik;color:#444;letter-spacing:.02em}
+@media (prefers-reduced-motion:reduce){.box .can,.box .can .mist{animation:none}}
 .box p{font-size:14px;line-height:1.6;margin-bottom:12px}
 .box p b{display:block;font-family:"Permanent Marker",cursive;font-weight:400;font-size:15px}
 .box .close{margin-top:10px}
@@ -190,9 +213,30 @@ footer a{color:var(--sky);cursor:pointer;text-decoration:underline;text-underlin
 
 <div class="modal" id="modal">
   <div class="box">
-    <h2>Impressum</h2>
+    <div class="imphead">
+    <svg class="can" viewBox="0 0 40 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <g class="mist">
+        <circle cx="33" cy="7" r="3" fill="#c6ff3d" stroke="#000" stroke-width="1.5"/>
+        <circle cx="38" cy="13" r="2" fill="#ff2fb4" stroke="#000" stroke-width="1.5"/>
+        <circle cx="30" cy="15" r="1.6" fill="#ff8a1f" stroke="#000" stroke-width="1.3"/>
+      </g>
+      <rect x="11" y="2" width="8" height="6" rx="2" fill="#9a9a9a" stroke="#000" stroke-width="2"/>
+      <rect x="7" y="7" width="16" height="6" rx="2" fill="#f2efe6" stroke="#000" stroke-width="2"/>
+      <rect x="4" y="13" width="22" height="49" rx="6" fill="#c6ff3d" stroke="#000" stroke-width="2.5"/>
+      <rect x="4" y="30" width="22" height="11" fill="#ff2fb4" stroke="#000" stroke-width="2.5"/>
+      <circle cx="15" cy="35.5" r="3.2" fill="#1b1b1f"/>
+    </svg>
+      <div>
+        <h2>Impressum</h2>
+        <div class="impsub">CanooStudio &middot; Spraylist</div>
+      </div>
+    </div>
     <p><b>Anbieter</b>Can Delibasi<br>Ludgerweg 184<br>42329 Wuppertal<br>Deutschland</p>
-    <p><b>Kontakt</b>E-Mail: canooservice@gmail.com<br>Discord: discord.gg/6MGQeGazGR</p>
+    <p><b>Kontakt</b></p>
+    <div class="clinks">
+      <a class="clink mail" href="mailto:support@spraylist.de">&#9993;&#65039; E-Mail schreiben<small>support@spraylist.de</small></a>
+      <a class="clink dc" href="https://discord.gg/6MGQeGazGR" target="_blank" rel="noopener">&#128172; Discord beitreten<small>discord.gg/6MGQeGazGR</small></a>
+    </div>
     <p><b>Verantwortlich für den Inhalt</b>Can Delibasi (Anschrift wie oben)</p>
     <p><b>Musik-Previews</b>Alle Hörproben werden direkt von Apple (iTunes Search API) gestreamt und sind offizielle 30-Sekunden-Previews der Rechteinhaber. Diese Seite hostet keine Musikdateien. Alle Titel, Artworks und Markennamen gehören ihren jeweiligen Eigentümern.</p>
     <p><b>Haftung für Inhalte</b>Die Inhalte dieser Seite wurden mit größter Sorgfalt erstellt. Für Richtigkeit, Vollständigkeit und Aktualität wird keine Gewähr übernommen.</p>
