@@ -2,10 +2,9 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="theme-color" content="#1b1b1f">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SPRAYLIST — Song erkennen in 0,1 Sekunden</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2212%22%20fill%3D%22%231b1b1f%22%2F%3E%3Ccircle%20cx%3D%2249%22%20cy%3D%2212%22%20r%3D%223.2%22%20fill%3D%22%23c6ff3d%22%2F%3E%3Ccircle%20cx%3D%2255%22%20cy%3D%2219%22%20r%3D%222.2%22%20fill%3D%22%23ff2fb4%22%2F%3E%3Ccircle%20cx%3D%2247%22%20cy%3D%2221%22%20r%3D%221.8%22%20fill%3D%22%23ff8a1f%22%2F%3E%3Ccircle%20cx%3D%2255%22%20cy%3D%229%22%20r%3D%221.6%22%20fill%3D%22%233fd7ff%22%2F%3E%3Ccircle%20cx%3D%2243%22%20cy%3D%2214%22%20r%3D%221.4%22%20fill%3D%22%23f2efe6%22%2F%3E%3Crect%20x%3D%2224%22%20y%3D%225%22%20width%3D%229%22%20height%3D%227%22%20rx%3D%222%22%20fill%3D%22%239a9a9a%22%20stroke%3D%22%23000%22%20stroke-width%3D%222.5%22%2F%3E%3Crect%20x%3D%2220%22%20y%3D%2211%22%20width%3D%2217%22%20height%3D%226%22%20rx%3D%222%22%20fill%3D%22%23f2efe6%22%20stroke%3D%22%23000%22%20stroke-width%3D%222.5%22%2F%3E%3Crect%20x%3D%2215%22%20y%3D%2217%22%20width%3D%2227%22%20height%3D%2242%22%20rx%3D%227%22%20fill%3D%22%23c6ff3d%22%20stroke%3D%22%23000%22%20stroke-width%3D%223%22%2F%3E%3Crect%20x%3D%2215%22%20y%3D%2230%22%20width%3D%2227%22%20height%3D%2212%22%20fill%3D%22%23ff2fb4%22%20stroke%3D%22%23000%22%20stroke-width%3D%223%22%2F%3E%3Ccircle%20cx%3D%2228.5%22%20cy%3D%2236%22%20r%3D%223.6%22%20fill%3D%22%231b1b1f%22%2F%3E%3C%2Fsvg%3E">
 <link href="https://fonts.googleapis.com/css2?family=Rubik+Spray+Paint&family=Bangers&family=Permanent+Marker&family=Rubik:wght@500;700;900&display=swap" rel="stylesheet">
 <style>
 :root{--wall:#1b1b1f;--wall2:#26262b;--chalk:#f2efe6;--lime:#c6ff3d;--mag:#ff2fb4;--org:#ff8a1f;--sky:#3fd7ff;--dim:#9a9a9a}
@@ -18,23 +17,13 @@ body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opa
 body::after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(600px 300px at 15% 0%,rgba(198,255,61,.14),transparent 70%),radial-gradient(500px 400px at 90% 100%,rgba(255,47,180,.14),transparent 70%)}
 .wrap{position:relative;z-index:1;width:min(700px,100%);margin:0 auto;padding:22px 18px 30px;min-height:100vh;display:flex;flex-direction:column}
 header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:14px}
-.brand-wrap{display:flex;align-items:center;gap:9px}
-.can{flex:0 0 auto;width:30px;height:44px;transform:rotate(-8deg)}
-.can .puff{animation:puff 2.6s ease-out infinite}
-@keyframes puff{0%,70%{opacity:0;transform:translate(0,0) scale(.6)}12%{opacity:.9}45%{opacity:0;transform:translate(7px,-6px) scale(1.5)}100%{opacity:0}}
-@media (prefers-reduced-motion:reduce){.can .puff{animation:none;opacity:.55}}
-.brand-block{display:inline-block;transform:rotate(-3deg)}
-.logo{font-family:"Rubik Spray Paint",cursive;font-size:24px;line-height:1;color:var(--lime);text-shadow:2px 2px 0 var(--mag),-1px -1px 0 #000;display:block}
-.brand-sub{display:flex;align-items:center;gap:5px;margin-top:3px;padding-left:2px}
-.brand-sub i{flex:1;height:2px;background:var(--mag);opacity:.8;font-style:normal}
-.brand-sub span{font-family:"Permanent Marker",cursive;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--chalk);opacity:.85;white-space:nowrap}
-.brand-sub span sup{font-size:6px;vertical-align:super;opacity:.7}
+.logo{font-family:"Rubik Spray Paint",cursive;font-size:34px;line-height:1;color:var(--lime);text-shadow:3px 3px 0 var(--mag),-1px -1px 0 #000;transform:rotate(-3deg);display:inline-block}
 .score{font-family:"Permanent Marker",cursive;font-size:14px;color:var(--dim)}
 .score strong{display:block;font-size:26px;color:var(--chalk);line-height:1}
 /* Sticker-Elemente */
 .sticker{display:inline-block;padding:6px 12px;background:var(--chalk);color:#111;font:900 12px Rubik;text-transform:uppercase;letter-spacing:.06em;transform:rotate(-2deg);box-shadow:2px 2px 0 #000}
 .bar{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
-.seg{display:flex;gap:6px;flex-wrap:wrap}
+.seg{display:flex;gap:6px}
 .seg button,.tier{border:2px solid #000;background:var(--wall2);color:var(--chalk);font:900 13px Rubik;padding:9px 14px;cursor:pointer;box-shadow:3px 3px 0 #000;transition:.1s;text-transform:uppercase;letter-spacing:.04em}
 .seg button.on{background:var(--chalk);color:#111}
 .tiers{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:4px 4px 6px 0}
@@ -129,98 +118,13 @@ footer a{color:var(--sky);cursor:pointer;text-decoration:underline;text-underlin
 .box p b{display:block;font-family:"Permanent Marker",cursive;font-weight:400;font-size:15px}
 .box .close{margin-top:10px}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
-
-
-/* ---------- Handy-Sperre ---------- */
-#gate{position:fixed;inset:0;z-index:9999;background:#1b1b1f;display:none;overflow-y:auto;
-  flex-direction:column;align-items:center;justify-content:center;text-align:center;
-  padding:calc(30px + env(safe-area-inset-top)) 22px calc(30px + env(safe-area-inset-bottom))}
-#gate::before{content:"";position:absolute;inset:0;pointer-events:none;
-  background:radial-gradient(600px 300px at 15% 0%,rgba(198,255,61,.13),transparent 70%),radial-gradient(500px 400px at 90% 100%,rgba(255,47,180,.13),transparent 70%)}
-#gate>*{position:relative;z-index:1}
-#gate.on{display:flex}
-#gate .gcan{width:52px;height:76px;transform:rotate(-8deg);margin-bottom:18px}
-#gate h2{font-family:"Rubik Spray Paint",cursive;font-size:clamp(30px,10vw,44px);color:var(--lime);
-  text-shadow:3px 3px 0 var(--mag),-1px -1px 0 #000;transform:rotate(-2deg);line-height:1.05;margin-bottom:20px}
-#gate p{font-family:"Permanent Marker",cursive;color:var(--chalk);font-size:16px;line-height:1.55;max-width:24em;margin-bottom:14px}
-#gate .soon{display:inline-block;margin-top:6px;background:var(--mag);color:#fff;border:2px solid #000;
-  box-shadow:4px 4px 0 #000;padding:10px 16px;font-family:"Permanent Marker",cursive;font-size:15px;transform:rotate(-1.5deg)}
-#gate .gsup{margin-top:28px;font:600 12px Rubik;color:var(--chalk);opacity:.55;letter-spacing:.03em}
-#gate .gsup a{color:var(--lime);text-decoration:underline;text-underline-offset:3px}
-
-/* ---------- MOBILE ---------- */
-button,.step,.tier,.play{-webkit-tap-highlight-color:transparent;touch-action:manipulation;-webkit-user-select:none;user-select:none}
-@supports(min-height:100dvh){.wrap{min-height:100dvh}}
-.iosnote{display:none;font-size:12px;color:var(--org);font-weight:700;line-height:1.4}
-body.ios .iosnote{display:block}
-.retry{margin-top:14px}
-.diag{display:block;margin-top:10px;opacity:.5;font-size:11px;letter-spacing:.05em}
-@media (max-width:620px){
-  .wrap{padding:14px 12px calc(24px + env(safe-area-inset-bottom))}
-  header{flex-direction:column;align-items:stretch;gap:10px;margin-bottom:10px}
-  header .hrow{display:flex;align-items:center;justify-content:space-between;width:100%;flex-direction:row!important}
-  .can{width:26px;height:38px}
-  .logo{font-size:22px}
-  .brand-sub span{font-size:9px}
-  .score{text-align:right}
-  .score strong{font-size:22px}
-  .vol input{width:92px}
-  .panel{padding:16px 14px;box-shadow:4px 4px 0 #000}
-  .panel::before,.panel::after{display:none}
-  .steps{grid-template-columns:repeat(5,1fr);gap:7px}
-  .step{height:52px;font-size:13px}
-  .controls{flex-direction:column;align-items:stretch;gap:12px}
-  .play{width:100%;height:76px;border-radius:0;transform:none;box-shadow:4px 4px 0 #000}
-  .play:active{transform:translate(3px,3px);box-shadow:1px 1px 0 #000}
-  .play svg{width:34px;height:34px}
-  .help{font-size:13px;text-align:center}
-  .guess input{padding:15px 14px}
-  .sugg{max-height:44vh;overflow-y:auto;-webkit-overflow-scrolling:touch}
-  .sugg button{padding:12px 12px}
-  .row{gap:8px}
-  .btn{padding:13px 14px;font-size:13px}
-  .btn.big{width:100%;font-size:19px;padding:16px 20px;transform:none}
-  .reveal{flex-wrap:wrap;gap:12px;transform:none}
-  .reveal img{width:56px;height:56px}
-  .reveal .pts{margin-left:auto;font-size:22px}
-  .worth{font-size:clamp(46px,15vw,72px)}
-  .rule{padding:10px 12px;gap:10px}
-  .log div{font-size:13px;padding:10px 12px}
-  footer{margin-top:20px;font-size:11px}
-  .modal .box{padding:20px;max-height:86vh}
-}
-@media (max-width:360px){
-  .steps{grid-template-columns:repeat(5,1fr);gap:5px}
-  .step{height:46px;font-size:11px}
-}
 </style>
 </head>
 <body>
-<div id="gate">
-  <svg class="gcan" viewBox="0 0 34 50" aria-hidden="true">
-    <rect x="15" y="6" width="7" height="4" fill="#9a9a9a" stroke="#000" stroke-width="1.6"/>
-    <rect x="8" y="9" width="11" height="5" fill="#ff2fb4" stroke="#000" stroke-width="1.8"/>
-    <rect x="5" y="14" width="17" height="32" rx="2" fill="#c6ff3d" stroke="#000" stroke-width="1.8"/>
-    <rect x="5" y="24" width="17" height="8" fill="#ff8a1f" stroke="#000" stroke-width="1.8"/>
-    <circle cx="13.5" cy="39" r="3" fill="#1b1b1f" stroke="#000" stroke-width="1.4"/>
-  </svg>
-  <h2>NICHT AUF<br>DEM HANDY</h2>
-  <p>Leider klappt es hier noch nicht.<br>Spiel es am PC, Laptop oder iPad.</p>
-  <p>Die Handy-Version kommt — wir arbeiten dran.</p>
-  <div class="soon">COMING SOON · SUMMER 2027</div>
-  <div class="gsup">Fragen? <a href="mailto:support@spraylist.party">support@spraylist.party</a></div>
-</div>
 <div class="wrap">
   <header>
-    <div class="hrow" style="display:flex;align-items:center;gap:14px"><div class="brand-wrap"><svg class="can" viewBox="0 0 34 50" aria-hidden="true">
-<g class="puff" style="transform-origin:27px 9px"><circle cx="27" cy="7" r="2.4" fill="#ff2fb4"/><circle cx="31" cy="11" r="1.6" fill="#3fd7ff"/><circle cx="26" cy="13" r="1.2" fill="#ff8a1f"/></g>
-<rect x="15" y="6" width="7" height="4" fill="#9a9a9a" stroke="#000" stroke-width="1.6"/>
-<rect x="8" y="9" width="11" height="5" fill="#ff2fb4" stroke="#000" stroke-width="1.8"/>
-<rect x="5" y="14" width="17" height="32" rx="2" fill="#c6ff3d" stroke="#000" stroke-width="1.8"/>
-<rect x="5" y="24" width="17" height="8" fill="#ff8a1f" stroke="#000" stroke-width="1.8"/>
-<circle cx="13.5" cy="39" r="3" fill="#1b1b1f" stroke="#000" stroke-width="1.4"/>
-</svg><div class="brand-block"><div class="logo">SPRAYLIST</div><div class="brand-sub"><span>CanooStudio<sup>®</sup></span><i></i></div></div></div><button class="btn" id="menubtn" style="display:none;padding:9px 14px;font-size:12px">☰ Menü</button></div>
-    <div class="hrow" style="display:flex;flex-direction:column;align-items:flex-end;gap:8px"><div class="score" id="scorebox" style="visibility:hidden">Score<strong id="total">0</strong></div><label class="vol">🔊 <input type="range" id="vol" min="0" max="100" value="50"><span id="volv">50 %</span></label></div>
+    <div style="display:flex;align-items:center;gap:14px"><div class="logo">SPRAYLIST</div><button class="btn" id="menubtn" style="display:none;padding:9px 14px;font-size:12px">☰ Menü</button></div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px"><div class="score" id="scorebox" style="visibility:hidden">Score<strong id="total">0</strong></div><label class="vol">🔊 <input type="range" id="vol" min="0" max="100" value="50"><span id="volv">50 %</span></label></div>
   </header>
 
   <!-- START -->
@@ -234,7 +138,7 @@ body.ios .iosnote{display:block}
       <div class="rule"><div class="n">3</div><div><b>Song eintippen</b><span>Falsch getippt: −500. Überspringen: 0 Punkte, aber du siehst die Auflösung.</span></div></div>
     </div>
     <div class="bar" style="margin-bottom:22px">
-      <div class="seg" id="region"><button class="on" data-r="de">🇩🇪 Deutsch</button><button data-r="rap">🎤 Deutschrap</button><button data-r="global">🌍 Global</button></div>
+      <div class="seg" id="region"><button class="on" data-r="de">🇩🇪 Deutsch</button><button data-r="global">🌍 Global</button></div>
       <div class="tiers" id="tiers">
         <button class="tier on" style="--c:#c6ff3d;--r:-2deg" data-t="easy">Easy</button>
         <button class="tier" style="--c:#3fd7ff;--r:1deg" data-t="medium">Medium</button>
@@ -256,7 +160,7 @@ body.ios .iosnote{display:block}
       <div class="steps" id="steps"></div>
       <div class="controls">
         <button class="play" id="play" aria-label="Abspielen"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></button>
-        <div class="help">Du hörst <b id="len">0,1 s</b><br>Stufe antippen, dann auf Play. Längere Stufen kosten Punkte.<br><span class="iosnote">Kein Ton? Klingelschalter am iPhone ausschalten.</span></div>
+        <div class="help">Du hörst <b id="len">0,1 s</b><br>Tipp auf eine Stufe, um mehr zu hören. Jede Stufe kostet Punkte.</div>
       </div>
       <div class="guess"><input id="inp" placeholder="Song oder Artist…" autocomplete="off"><div class="sugg" id="sugg"></div></div>
       <div class="row" id="actions"><button class="btn" id="skip">Skip</button></div>
@@ -299,266 +203,76 @@ body.ios .iosnote{display:block}
 <script>
 const POOLS={
 de:{
-easy:["Apache 207|Komet","Ayliva|Wunder","Nina Chuba|Wildberry Lillet","Ski Aggu|Friesenjung","Peter Fox|Zukunft Pink","Capital Bra|Cherry Lady","Shirin David|Bauch Beine Po","Bausa|Was du Liebe nennst","Nena|99 Luftballons","Namika|Lieblingsmensch","Mark Forster|Chöre","Cro|Easy","Die Toten Hosen|Tage wie diese","Rammstein|Du hast","Pashanim|Airwaves","Kraftklub|Ein Song reicht","Sido|Astronaut","Tokio Hotel|Durch den Monsun","Bonez MC|Roadrunner","Apache 207|Roller"],
-medium:["Ufo361|Stehst du auf","Luciano|Beautiful Girl","Ayliva|Sie weiß","Kontra K|Erde & Knochen","01099|Dachterrasse","Jazeek|Akon","Casper|Im Ascheregen","Trettmann|Grauer Beton","AnnenMayKantereit|Oft gefragt","Marteria|Kids (2 Finger an den Kopf)","Bilderbuch|Bungalow","Ski Aggu|Party Sahne","Paula Hartmann|Nie verliebt","Nina Chuba|Mangos mit Chili","Bushido|Alles verloren","Yung Hurn|Bianco","Deichkind|Leider geil","Seeed|Dickes B","Die Ärzte|Westerland","Haftbefehl|Chabos wissen wer der Babo ist"],
-hard:["Ski Aggu|Rave Sahne","Levin Liam|Dünnes Eis","Zartmann|Tau mich auf","Nina Chuba|Fata Morgana","Yung Hurn|Nein","Provinz|Was uns bleibt","Von Wegen Lisbeth|Bitch","Kummer|9010","OG Keemo|Malcolm","Mine|Unfall","Ufo361|Ich bin ein Berliner","Faber|Wem du's heute kannst besorgen","Betterov|Dussmann","Edwin Rosen|Leichter//Kälter","Ennio|Eis","Symba|Der Sommer nach der Lehre","Tarek K.I.Z|Ja","Juju|Vermissen","Mero|Baller los","Miksu|Wolke 10"],
-expert:["Yung Hurn|Bxtch","Haiyti|Coco Pops","Nimo|Heute mit mir","Ahzumjot|Gute Nacht","Kraftklub|Fan von dir","Fatoni|Wahrheit","Boys Noize|Overthrow","Moses Pelham|Lebenslänglich","Grossstadtgeflüster|Fickt-Euch-Allee","Cro|Whatever","Alligatoah|Willst du","Isolation Berlin|Alles grau","Drangsal|Allan Align","Ilgen-Nur|In My Head","Danger Dan|Das ist alles von der Kunstfreiheit gedeckt","Blumfeld|Tausend Tränen tief","Die Sterne|Was hat dich bloß so ruiniert","Tocotronic|Ich möchte Teil einer Jugendbewegung sein","Wanda|Bologna","Trettmann|Stolpersteine"],
-impossible:["Die Goldenen Zitronen|Am Tag als Thomas Anders starb","Ja, Panik|DMD KIU LIDT","Messer|Die Experten","Stereo Total|Wir tanzen im 4-Eck","Kante|Die Summe der einzelnen Teile","Lassie Singers|Die Pfütze","Element of Crime|Delmenhorst","Fehlfarben|Ein Jahr (Es geht voran)","Palais Schaumburg|Wir bauen eine neue Stadt","Der Plan|Gummitwist","DAF|Der Mussolini","Chris Imler|Nervös","Die Heiterkeit|Wir stehen nur rum","Mutter|Der Grund","Kraftwerk|Das Model","Can|Vitamin C","Neu!|Hallogallo","Grauzone|Eisbär","Andreas Dorau|Fred vom Jupiter","Tobias Bamborschke|Ruf mich an"]},
-rap:{
-easy:["Cave|Casa Cuba","Amo|Juana","Aymen|Picasso","Aymen|Capri Sun","Aymo|Bleib stark","Jazeek|Akon","Ufo361|Roof voller Stars","AK Ausserkontrolle|Sixpack","Pashanim|Shababs im VIP","Nina Chuba|Wenn das Liebe ist","Apache 207|Komet","Ayliva|Wunder","Luciano|Gimme Luv","RAF Camora|Mach Papier","Bonez MC|Sprite","Capital Bra|Ghetto Superstars","AK Ausserkontrolle|LDNB","Reezy|Sabia que no","Dardan|Nonstop","Thizzy52|Blockkids"],
-medium:["Amo|Mala Fama","Amo|Milano","Amo|Rapstar","Aymen|Plug","Aymo|Que pasa","Amo|Love all night","Aymo|Rücken an Rücken","Nimo|Aye","Capo|Testarossa","RAF Camora|Only One","Lacazette|MNG","Lacazette|CDY","Jazeek|Blessed","Arkan|A-R-K-A-N","Zah1de|Sweet 16","Eddin|Meine Welt","Sira|Rhythm","Ikkimel|Who's that","Bobby Vandamme|Andere Niveau","SadiQ|Ombre Nomade"],
-hard:["Kollegah|Business","Farid Bang|Asphalt Massaka","Gzuz|Was hast du gedacht","Bonez MC|Palmen aus Plastik","Ufo361|Ich bin ein Berliner","Nimo|Habibi","Capital Bra|Neymar","Capital Bra|Berlin lebt","Samra|Wieder Lila","RAF Camora|Andere Liga","Bausa|Was du Liebe nennst","Kalim|Rap","Olexesh|Magisch","Celo & Abdi|Mongo","SSIO|Nullkommaneun","Xatar|Nr. 1","Azet|Fast Life","Luciano|Bounce","Marteria|Kids","Genetikk|Achter Tag"],
-expert:["Kool Savas|King of Rap","Kool Savas|LMS","Azad|Napalm","Curse|Widerstand","Samy Deluxe|Weck mich auf","Sido|Mein Block","Bushido|Electro Ghetto","Fler|NDW 2005","Massiv|Blut gegen Blut","Eko Fresh|Ich bin jung und brauche das Geld","Prinz Pi|Kompass ohne Norden","Megaloh|Regen","Chefket|Rap und Soul","Afrob|Reimemonster","Dendemann|Endlich Nichtschwimmer","Audio88 & Yassin|Halleluja","Haiyti|Coco Pops","Yung Hurn|Bianco","Chakuza|Monster in mir","Haftbefehl|Chabos wissen wer der Babo ist"],
-impossible:["Advanced Chemistry|Fremd im eigenen Land","Die Fantastischen Vier|Die da","Fettes Brot|Nordisch by Nature","Absolute Beginner|Füchse","Freundeskreis|A-N-N-A","Rödelheim Hartreim Projekt|Reime","Cora E.|Schlüsselkind","Massive Töne|Cruisin","Dynamite Deluxe|Pures Gift","Eins Zwo|Danach","Stieber Twins|Fenster zum Hof","Beginner|Hammerhart","Samy Deluxe|Dis wo ich herkomm","Ferris MC|Reflektor","Fünf Sterne deluxe|Willst du mit mir gehn","Der Tobi & das Bo|Jetzt kommen wir auf die Schule","Deichkind|Bon Voyage","Curse|Bis zum Schluss","Torch|Kapitel 1","Blumentopf|Liebe und Hass"]},
+easy:["Apache 207|Komet", "Ayliva|Wunder", "Nina Chuba|Wildberry Lillet", "Ski Aggu|Friesenjung", "Peter Fox|Zukunft Pink", "Capital Bra|Cherry Lady", "Shirin David|Bauch Beine Po", "Bausa|Was du Liebe nennst", "Nena|99 Luftballons", "Namika|Lieblingsmensch", "Mark Forster|Chöre", "Cro|Easy", "Die Toten Hosen|Tage wie diese", "Rammstein|Du hast", "Pashanim|Airwaves", "Kraftklub|Ein Song reicht", "Sido|Astronaut", "Tokio Hotel|Durch den Monsun", "Bonez MC|Roadrunner", "Apache 207|Roller", "Helene Fischer|Atemlos durch die Nacht", "Herbert Grönemeyer|Männer", "Udo Lindenberg|Cello", "Andreas Bourani|Auf uns", "Max Giesinger|80 Millionen", "Wincent Weiss|Musik sein", "Sarah Connor|Vincent", "Lena|Satellite", "Silbermond|Das Beste", "Die Fantastischen Vier|MfG", "Fettes Brot|Jein", "Culcha Candela|Hamma", "Peter Fox|Haus am See", "Seeed|Ding", "Deichkind|Bück dich hoch", "Sido|Bilder im Kopf", "Cro|Traum", "Kontra K|Erfolg ist kein Glück", "Nico Santos|Rooftop", "Alvaro Soler|Sofia", "187 Strassenbande|Millionär", "Gzuz|Was hast du gedacht", "Bonez MC & RAF Camora|Palmen aus Plastik", "Bonez MC & RAF Camora|500 PS", "Ski Aggu|Zornig (2024)", "01099|Anders", "Ski Aggu|mietfrei", "Hava|Kein Schlaf", "Jamule|Fastlane", "Nimo|Heute mit mir"],
+medium:["Ufo361|Stehst du auf", "Luciano|Beautiful Girl", "Ayliva|Sie weiß", "Kontra K|Erde & Knochen", "01099|Dachterrasse", "Jazeek|Akon", "Casper|Im Ascheregen", "Trettmann|Grauer Beton", "AnnenMayKantereit|Oft gefragt", "Marteria|Kids (2 Finger an den Kopf)", "Bilderbuch|Bungalow", "Ski Aggu|Party Sahne", "Paula Hartmann|Nie verliebt", "Nina Chuba|Mangos mit Chili", "Bushido|Alles verloren", "Yung Hurn|Bianco", "Deichkind|Leider geil", "Seeed|Dickes B", "Die Ärzte|Westerland", "Haftbefehl|Chabos wissen wer der Babo ist", "Beginner|Füchse", "Freundeskreis|A-N-N-A", "Samy Deluxe|Weck mich auf", "Max Herre|1ste Liebe", "Clueso|Gewinner", "Fettes Brot|Emanuela", "Die Fantastischen Vier|Troy", "K.I.Z|Hurra die Welt geht unter", "Rin|Bierstübl", "Bausa|Madonna", "Capital Bra|Neymar", "Badmómzjay|Blaues Licht", "Domiziana|Ohne Benzin", "Makko|Reserviert", "Apache 207|200 km/h", "Shirin David|Lieben wir", "Juju|Kein Wort", "AnnenMayKantereit|Barfuß am Klavier", "Milky Chance|Stolen Dance", "Zoe Wees|Control", "187 Strassenbande|Mit den Jungz", "Gzuz|Hinterher (Für Mama)", "Bonez MC & RAF Camora|Ohne mein Team", "Hava|Mailbox", "Elif|Augen Zu", "Jamule|Liege wieder wach", "Jamule|No Comprendo", "reezy|Phantom", "Kasimir1441|Ohne Dich", "Shirin David|atzen & barbies"],
+hard:["Ski Aggu|Rave Sahne", "Levin Liam|Dünnes Eis", "Zartmann|Tau mich auf", "Nina Chuba|Fata Morgana", "Yung Hurn|Nein", "Provinz|Was uns bleibt", "Von Wegen Lisbeth|Bitch", "Kummer|9010", "OG Keemo|Malcolm", "Mine|Unfall", "Ufo361|Ich bin ein Berliner", "Faber|Wem du's heute kannst besorgen", "Betterov|Dussmann", "Edwin Rosen|Leichter//Kälter", "Ennio|Eis", "Symba|Der Sommer nach der Lehre", "Tarek K.I.Z|Ja", "Juju|Vermissen", "Mero|Baller los", "Miksu|Wolke 10", "Rin|Avirex", "Casper|Lang lebe der Tod", "Marteria|Welt der Wunder", "Trettmann|Knöcheltief", "Kummer|Der Letzte Song (Alles wird gut)", "Bilderbuch|Maschin", "Wanda|Bussi Baby", "Voodoo Jürgens|Heite grob ma Tote aus", "Antilopen Gang|Beate Zschäpe hört U2", "Audio88 & Yassin|Wer ist das", "Sxtn|Von Party zu Party", "Haiyti|Angst", "Giant Rooks|Watershed", "Leoniden|Kids", "Von Wegen Lisbeth|Wenn du tanzt", "Paula Hartmann|Kleinstadt", "Roosevelt|Colours", "Die Orsons|Schwung in die Kiste", "Ebow|K4L", "Blond|Martini Sprite", "187 Strassenbande|Paradies", "Sa4|Nachtaktiv", "Hava|Krank", "Elif|Nur mir", "KitschKrieg|Unterwegs", "reezy|Manchester", "reezy|Noch einmal", "Kasimir1441|Hentai", "Ski Aggu|PALERMO", "Zartmann|wie du manchmal fehlst", "badchieff|JUNG UND LAUT"],
+expert:["Yung Hurn|Bxtch", "Haiyti|Coco Pops", "Ahzumjot|Gute Nacht", "Kraftklub|Fan von dir", "Fatoni|Wahrheit", "Boys Noize|Overthrow", "Moses Pelham|Lebenslänglich", "Grossstadtgeflüster|Fickt-Euch-Allee", "Cro|Whatever", "Alligatoah|Willst du", "Isolation Berlin|Alles grau", "Drangsal|Allan Align", "Ilgen-Nur|In My Head", "Danger Dan|Das ist alles von der Kunstfreiheit gedeckt", "Blumfeld|Tausend Tränen tief", "Die Sterne|Was hat dich bloß so ruiniert", "Tocotronic|Ich möchte Teil einer Jugendbewegung sein", "Wanda|Bologna", "Trettmann|Stolpersteine", "Schnipo Schranke|Pisse", "Die Nerven|Angst", "International Music|Cool", "Die Türen|Exoterik", "Sophia Kennedy|Being Special", "Sofia Portanet|Freier Fall", "Gurr|Walnut Dust", "The Notwist|Pick Up the Phone", "Drangsal|Turmbau zu Babel", "Zugezogen Maskulin|Endzeitstimmung", "Edgar Wasser|Fake", "Juse Ju|Millennium", "Balbina|Nichts", "Sophie Hunger|Le Vent Nous Portera", "Erobique|Urlaub in Italien", "Chris Imler|Maschine Brennt", "Die Heiterkeit|Herbst in der Skyline", "Isolation Berlin|Serpentinen", "Fatoni|Kein Held", "Turbostaat|Fibel", "reezy|osaft", "reezy|In & Out", "Kasimir1441|Johnny Walker", "Kasimir1441|Dicke Bahn", "Hava|Flashbacks", "Elif|Du tust mir nicht gut", "Ritter Lean|NPCs"],
+impossible:["Die Goldenen Zitronen|Am Tag als Thomas Anders starb","Ja, Panik|DMD KIU LIDT","Messer|Die Experten","Stereo Total|Wir tanzen im 4-Eck","Kante|Die Summe der einzelnen Teile","Lassie Singers|Die Pfütze","Element of Crime|Delmenhorst","Fehlfarben|Ein Jahr (Es geht voran)","Palais Schaumburg|Wir bauen eine neue Stadt","Der Plan|Gummitwist","DAF|Der Mussolini","Chris Imler|Nervös","Die Heiterkeit|Wir stehen nur rum","Mutter|Der Grund","Kraftwerk|Das Model","Can|Vitamin C","Neu!|Hallogallo","Grauzone|Eisbär","Andreas Dorau|Fred vom Jupiter","Tobias Bamborschke|Ruf mich an","Faust|It's a Rainy Day, Sunshine Girl","Cluster|Hollywood","Harmonia|Watussi","Popol Vuh|Aguirre I","Amon Düül II|Archangels Thunderbird","Tangerine Dream|Love on a Real Train","Klaus Schulze|Bayreuth Return","Malaria!|Kaltes klares Wasser","Xmal Deutschland|Incubus Succubus","Einstürzende Neubauten|Haus der Lüge","Abwärts|Computerstaat","Ideal|Blaue Augen","Trio|Da Da Da","Extrabreit|Hurra, hurra, die Schule brennt","Holger Czukay|Cool in the Pool","Liaisons Dangereuses|Los Niños del Parque","Pyrolator|Danger Cruising","Deutsch Amerikanische Freundschaft|Der Räuber und der Prinz","Conrad Schnitzler|Ballet Statique","Asmus Tietchens|Formen der Liebe"]},
 global:{
-easy:["The Weeknd|Blinding Lights","Ed Sheeran|Shape of You","Queen|Bohemian Rhapsody","Eurythmics|Sweet Dreams (Are Made of This)","Billie Eilish|bad guy","Adele|Rolling in the Deep","Lady Gaga|Bad Romance","Eminem|Lose Yourself","Coldplay|Viva La Vida","Rihanna|Umbrella","Michael Jackson|Billie Jean","Dua Lipa|Levitating","Nirvana|Smells Like Teen Spirit","Harry Styles|As It Was","Tones and I|Dance Monkey","Ava Max|Sweet but Psycho","B.o.B|Airplanes","Journey|Don't Stop Believin'","Pharrell Williams|Happy","Miley Cyrus|Flowers"],
-medium:["Tame Impala|The Less I Know the Better","Glass Animals|Heat Waves","Kendrick Lamar|HUMBLE.","Arctic Monkeys|Do I Wanna Know?","Lorde|Royals","Foster the People|Pumped Up Kicks","Hozier|Take Me to Church","Drake|God's Plan","Doja Cat|Say So","Post Malone|Circles","Gorillaz|Feel Good Inc.","Daft Punk|Get Lucky","Outkast|Hey Ya!","Travis Scott|SICKO MODE","Olivia Rodrigo|good 4 u","SZA|Kill Bill","Bad Bunny|Tití Me Preguntó","Metro Boomin|Creepin'","Sabrina Carpenter|Espresso","Chappell Roan|Good Luck, Babe!"],
-hard:["Steve Lacy|Bad Habit","MGMT|Electric Feel","The Neighbourhood|Sweater Weather","Frank Ocean|Pink + White","Tyler, The Creator|EARFQUAKE","Phoebe Bridgers|Motion Sickness","Mac Miller|Self Care","Childish Gambino|Redbone","Radiohead|No Surprises","Bon Iver|Skinny Love","Kanye West|Runaway","Fred again..|Turn On The Lights again..","PinkPantheress|Boy's a liar","Dominic Fike|3 Nights","Mk.gee|Alesis","Laufey|From The Start","Djo|End of Beginning","d4vd|Romantic Homicide","Cigarettes After Sex|Apocalypse","Mitski|My Love Mine All Mine"],
-expert:["King Krule|Easy Easy","Men I Trust|Show Me How","Alex G|Runner","Yves Tumor|Jackie","Beach House|Space Song","Aphex Twin|Avril 14th","Cocteau Twins|Cherry-coloured Funk","Sufjan Stevens|Fourth of July","JPEGMAFIA|BALD!","Slowdive|Alison","MF DOOM|Rapp Snitch Knishes","Boards of Canada|Roygbiv","Duster|Gold Dust","Björk|Hyperballad","Clairo|Bags","Nujabes|Feather","Dean Blunt|I Can't Stop","Grouper|Heavy Water / I'd Rather Be Sleeping","Ichiko Aoba|Asleep Among Endives","Mitski|First Love / Late Spring"],
-impossible:["Have a Nice Life|Bloodhail","Xiu Xiu|I Luv the Valley OH!","Death Grips|Hacker","Fishmans|Long Season","Arca|Piel","Panda Bear|Bros","Swans|Screen Shot","Ryuichi Sakamoto|Merry Christmas Mr. Lawrence","Oneohtrix Point Never|Chrome Country","Talk Talk|The Rainbow","Jai Paul|BTSTU","Autechre|Bine","Broadcast|Tender Buttons","The Microphones|The Glow Pt. 2","Coil|Fire of the Mind","Burial|Archangel","Tim Hecker|Chimeras","Deerhunter|Helicopter","Alice Coltrane|Journey in Satchidananda","Hiroshi Yoshimura|Blink"]}};
+easy:["The Weeknd|Blinding Lights","Ed Sheeran|Shape of You","Queen|Bohemian Rhapsody","Eurythmics|Sweet Dreams (Are Made of This)","Billie Eilish|bad guy","Adele|Rolling in the Deep","Lady Gaga|Bad Romance","Eminem|Lose Yourself","Coldplay|Viva La Vida","Rihanna|Umbrella","Michael Jackson|Billie Jean","Dua Lipa|Levitating","Nirvana|Smells Like Teen Spirit","Harry Styles|As It Was","Tones and I|Dance Monkey","Ava Max|Sweet but Psycho","B.o.B|Airplanes","Journey|Don't Stop Believin'","Pharrell Williams|Happy","Miley Cyrus|Flowers","Michael Jackson|Beat It","Michael Jackson|Smooth Criminal","Michael Jackson|Thriller","ABBA|Dancing Queen","Bee Gees|Stayin' Alive","a-ha|Take On Me","Toto|Africa","Bon Jovi|Livin' on a Prayer","Whitney Houston|I Wanna Dance with Somebody","Survivor|Eye of the Tiger","Mark Ronson|Uptown Funk","The Killers|Mr. Brightside","Oasis|Wonderwall","Rick Astley|Never Gonna Give You Up","Taylor Swift|Shake It Off","Luis Fonsi|Despacito","Lil Nas X|Old Town Road","Imagine Dragons|Believer","Katy Perry|Roar","Sia|Chandelier"],
+medium:["Tame Impala|The Less I Know the Better", "Glass Animals|Heat Waves", "Kendrick Lamar|HUMBLE.", "Arctic Monkeys|Do I Wanna Know?", "Lorde|Royals", "Foster the People|Pumped Up Kicks", "Hozier|Take Me to Church", "Drake|God's Plan", "Doja Cat|Say So", "Post Malone|Circles", "Gorillaz|Feel Good Inc.", "Daft Punk|Get Lucky", "Outkast|Hey Ya!", "Travis Scott|SICKO MODE", "Olivia Rodrigo|good 4 u", "SZA|Kill Bill", "Bad Bunny|Tití Me Preguntó", "Metro Boomin|Creepin'", "Sabrina Carpenter|Espresso", "Chappell Roan|Good Luck, Babe!", "The Weeknd|Save Your Tears", "Dua Lipa|Don't Start Now", "Harry Styles|Watermelon Sugar", "Kanye West|Stronger", "Rihanna|Diamonds", "Avicii|Wake Me Up", "Swedish House Mafia|Don't You Worry Child", "David Guetta|Titanium", "Clean Bandit|Rockabye", "Ed Sheeran|Perfect", "Gotye|Somebody That I Used to Know", "OneRepublic|Counting Stars", "twenty one pilots|Stressed Out", "Linkin Park|In the End", "Green Day|Basket Case", "Red Hot Chili Peppers|Californication", "Fleetwood Mac|Dreams", "Daft Punk|One More Time", "Lana Del Rey|Summertime Sadness", "Karol G|Provenza", "Ski Mask the Slump God|Faucet Failure"],
+hard:["Steve Lacy|Bad Habit", "MGMT|Electric Feel", "The Neighbourhood|Sweater Weather", "Frank Ocean|Pink + White", "Tyler, The Creator|EARFQUAKE", "Phoebe Bridgers|Motion Sickness", "Mac Miller|Self Care", "Childish Gambino|Redbone", "Radiohead|No Surprises", "Bon Iver|Skinny Love", "Kanye West|Runaway", "Fred again..|Turn On The Lights again..", "PinkPantheress|Boy's a liar", "Dominic Fike|3 Nights", "Mk.gee|Alesis", "Laufey|From The Start", "Djo|End of Beginning", "d4vd|Romantic Homicide", "Cigarettes After Sex|Apocalypse", "Mitski|My Love Mine All Mine", "Frank Ocean|Nights", "Tyler, The Creator|See You Again", "Kendrick Lamar|Money Trees", "SZA|Good Days", "Steve Lacy|Dark Red", "Rex Orange County|Best Friend", "Still Woozy|Goodie Bag", "Omar Apollo|Evergreen", "Faye Webster|Kingston", "Beabadoobee|Coffee", "Clairo|Sofia", "Wallows|Are You Bored Yet?", "Arctic Monkeys|I Wanna Be Yours", "The Smiths|There Is a Light That Never Goes Out", "Joy Division|Love Will Tear Us Apart", "The Cure|Just Like Heaven", "Talking Heads|This Must Be the Place", "Pixies|Where Is My Mind?", "Radiohead|Weird Fishes/ Arpeggi", "Sufjan Stevens|Mystery of Love", "Ski Mask the Slump God|Catch Me Outside"],
+expert:["King Krule|Easy Easy", "Men I Trust|Show Me How", "Alex G|Runner", "Yves Tumor|Jackie", "Beach House|Space Song", "Aphex Twin|Avril 14th", "Cocteau Twins|Cherry-coloured Funk", "Sufjan Stevens|Fourth of July", "JPEGMAFIA|BALD!", "Slowdive|Alison", "MF DOOM|Rapp Snitch Knishes", "Boards of Canada|Roygbiv", "Duster|Gold Dust", "Björk|Hyperballad", "Clairo|Bags", "Nujabes|Feather", "Dean Blunt|I Can't Stop", "Grouper|Heavy Water / I'd Rather Be Sleeping", "Ichiko Aoba|Asleep Among Endives", "Mitski|First Love / Late Spring", "Duster|Inside Out", "Alex G|Sarah", "Elliott Smith|Between the Bars", "Nick Drake|Pink Moon", "Vashti Bunyan|Just Another Diamond Day", "Broadcast|Come On Let's Go", "Stereolab|French Disko", "My Bloody Valentine|Only Shallow", "Slint|Good Morning, Captain", "James Blake|Retrograde", "FKA twigs|Two Weeks", "Solange|Cranes in the Sky", "Blood Orange|Charcoal Baby", "Sampha|(No One Knows Me) Like the Piano", "Little Simz|Introvert", "Aphex Twin|Xtal", "Jamie xx|Gosh", "Caroline Polachek|Bunny Is a Rider", "Yellow Magic Orchestra|Rydeen", "Haruomi Hosono|Sports Men", "Ski Mask the Slump God|Nuketown"],
+impossible:["Have a Nice Life|Bloodhail","Xiu Xiu|I Luv the Valley OH!","Death Grips|Hacker","Fishmans|Long Season","Arca|Piel","Panda Bear|Bros","Swans|Screen Shot","Ryuichi Sakamoto|Merry Christmas Mr. Lawrence","Oneohtrix Point Never|Chrome Country","Talk Talk|The Rainbow","Jai Paul|BTSTU","Autechre|Bine","Broadcast|Tender Buttons","The Microphones|The Glow Pt. 2","Coil|Fire of the Mind","Burial|Archangel","Tim Hecker|Chimeras","Deerhunter|Helicopter","Alice Coltrane|Journey in Satchidananda","Hiroshi Yoshimura|Blink","The Caretaker|It's Just a Burning Memory","Have a Nice Life|The Big Gloom","Lingua Ignota|DO YOU DOUBT ME TRAITOR","Black Country, New Road|Basketball Shoes","Coil|Going Up","Scott Walker|The Electrician","This Heat|24 Track Loop","Robert Wyatt|Sea Song","Pharoah Sanders|The Creator Has a Master Plan","Don Cherry|Brown Rice","Sun Ra|Space Is the Place","Albert Ayler|Ghosts","Merzbow|Woodpecker No. 1","Fennesz|Endless Summer","Autechre|Gantz Graf","Squarepusher|My Red Hot Car","Venetian Snares|Szamár Madár","Death Grips|Guillotine","clipping.|Body & Blood","Midori Takada|Mr. Henri Rousseau's Dream"]}};
 const STEPS=[0.1,0.3,0.5,1,2,3,5,10,15,30];
 const worthOf=t=>Math.round(3500+6500*(1-Math.log10(t*10)/Math.log10(300)));
 const fmt=n=>n.toLocaleString("de-DE"),sec=t=>String(t).replace(".",",")+" s";
-function jsonp(url,ms=15000){return new Promise((res,rej)=>{
-  const cb="cb_"+Math.random().toString(36).slice(2);
-  const s=document.createElement("script");
-  const t=setTimeout(()=>{clean();rej(new Error("timeout"))},ms);
-  function clean(){clearTimeout(t);try{delete window[cb]}catch(e){window[cb]=undefined}s.remove()}
-  window[cb]=d=>{clean();res(d)};
-  s.src=url+"&callback="+cb;s.onerror=()=>{clean();rej(new Error("jsonp"))};
-  document.head.appendChild(s)})}
-/* ---- Cache + Rate-Limit: Apple erlaubt nur ~20 Anfragen/Minute pro IP ---- */
-const CK="spl_cache_v2";
-let CACHE={};try{CACHE=JSON.parse(localStorage.getItem(CK)||"{}")}catch(e){CACHE={}}
-let cSaveT=null;
-function cacheSave(){clearTimeout(cSaveT);cSaveT=setTimeout(()=>{
-  try{const k=Object.keys(CACHE);if(k.length>500)k.slice(0,k.length-400).forEach(x=>delete CACHE[x]);
-  localStorage.setItem(CK,JSON.stringify(CACHE))}catch(e){}},500)}
-const slim=r=>({trackName:r.trackName,artistName:r.artistName,previewUrl:r.previewUrl,
-  trackViewUrl:r.trackViewUrl,artworkUrl100:r.artworkUrl100,artworkUrl60:r.artworkUrl60});
-
-const RLK="spl_rl_v1";
-function rlLoad(){try{const d=JSON.parse(localStorage.getItem(RLK)||"{}");return{hits:d.hits||[],until:d.until||0}}catch(e){return{hits:[],until:0}}}
-function rlSave(){try{localStorage.setItem(RLK,JSON.stringify({hits:RL.hits.slice(-30),until:RL.until}))}catch(e){}}
-const _rl=rlLoad();
-const RL={hits:_rl.hits,until:_rl.until,q:[],busy:false};
-const blockedFor=()=>Math.max(0,Math.ceil((RL.until-Date.now())/1000));
-function markBlocked(){RL.until=Date.now()+75000;rlSave()}
-function pump(){
-  if(RL.busy||!RL.q.length)return;
-  const now=Date.now();RL.hits=RL.hits.filter(t=>now-t<60000);
-  if(RL.until>now){RL.busy=true;setTimeout(()=>{RL.busy=false;pump()},RL.until-now+200);return}
-  if(RL.hits.length>=14){RL.busy=true;setTimeout(()=>{RL.busy=false;pump()},60000-(now-RL.hits[0])+300);return}
-  const job=RL.q.shift();RL.hits.push(now);rlSave();RL.busy=true;
-  job.fn().then(job.res,job.rej).then(()=>{setTimeout(()=>{RL.busy=false;pump()},320)});
-}
-const queued=fn=>new Promise((res,rej)=>{RL.q.push({fn,res,rej});pump()});
-
-function search(q,limit=6){
-  const key=q.toLowerCase()+"|"+limit;
-  if(CACHE[key])return Promise.resolve(CACHE[key]);
-  return queued(()=>jsonp(`https://itunes.apple.com/search?term=${encodeURIComponent(q)}&media=music&entity=song&limit=${limit}&country=de`))
-    .then(d=>{const r=(d.results||[]).map(slim);CACHE[key]=r;cacheSave();return r},
-          e=>{if(e&&e.message==="jsonp")markBlocked();throw e});
-}
-const cached=(q,limit=6)=>!!CACHE[q.toLowerCase()+"|"+limit];
+function jsonp(url){return new Promise((res,rej)=>{const cb="cb_"+Math.random().toString(36).slice(2);window[cb]=d=>{delete window[cb];s.remove();res(d)};const s=document.createElement("script");s.src=url+"&callback="+cb;s.onerror=()=>{s.remove();rej(new Error("jsonp"))};document.head.appendChild(s)})}
+const search=(q,limit=6)=>jsonp(`https://itunes.apple.com/search?term=${encodeURIComponent(q)}&media=music&entity=song&limit=${limit}&country=de`).then(d=>d.results||[]);
 const norm=s=>s.toLowerCase().replace(/\(.*?\)|\[.*?\]|feat\..*|ft\..*|- .*remaster.*|- .*version.*|- .*edit.*/g,"").replace(/[^a-z0-9äöüß]+/g," ").trim();
 
-
-/* ---------- Handy-Sperre (BLOCK_MOBILE=false schaltet sie ab) ---------- */
-const BLOCK_MOBILE=true;
-const coarse=()=>window.matchMedia&&window.matchMedia("(pointer:coarse)").matches;
-const uaPhone=()=>/Android.*Mobile|iPhone|iPod|Windows Phone|BlackBerry|Opera Mini|IEMobile/i.test(navigator.userAgent);
-const smallTouch=()=>Math.min(window.innerWidth,window.innerHeight)<500&&navigator.maxTouchPoints>0&&coarse();
-const isPhone=()=>uaPhone()||smallTouch();
-function gateCheck(){
-  if(!BLOCK_MOBILE)return;
-  const on=isPhone();
-  document.getElementById("gate").classList.toggle("on",on);
-  document.documentElement.style.overflow=on?"hidden":"";
-  if(on){try{stopAudio()}catch(e){}}
-}
-gateCheck();
-window.addEventListener("resize",gateCheck);
-window.addEventListener("orientationchange",gateCheck);
-
 const $=id=>document.getElementById(id);
-let region="de",tier="easy",songs=[],idx=0,total=0,log=[],cur=null,stepI=0,stepMax=0,penalty=0,done=false;
-
-/* ================= AUDIO-ENGINE (Handy-tauglich) =================
-   Weg 1: Preview per fetch holen, mit WebAudio dekodieren -> exakte
-          Snippets, kein Nachladen, Lautstärke funktioniert auch auf iOS.
-   Weg 2 (Fallback): normales <audio> mit Original-URL.
-=================================================================== */
-const IOS=/iP(hone|ad|od)/.test(navigator.userAgent)||(navigator.maxTouchPoints>1&&/Mac/.test(navigator.userAgent));
-if(IOS)document.body.classList.add("ios");
-const SILENT="data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQAAAAA=";
-const el=new Audio();el.preload="auto";el.playsInline=true;el.setAttribute("playsinline","");el.setAttribute("webkit-playsinline","");
-let ctx=null,gain=null,node=null,stopT=null,vol=.5,unlocked=false;
-
-function ensureCtx(){
-  if(ctx)return ctx;
-  const AC=window.AudioContext||window.webkitAudioContext;
-  if(!AC)return null;
-  try{ctx=new AC()}catch(e){return null}
-  gain=ctx.createGain();gain.gain.value=vol;gain.connect(ctx.destination);
-  return ctx;
-}
-function unlock(){
-  if(unlocked)return;unlocked=true;
-  try{if(navigator.audioSession)navigator.audioSession.type="playback"}catch(e){}
-  const c=ensureCtx();
-  if(c){c.resume().catch(()=>{});
-    try{const b=c.createBuffer(1,1,22050),s=c.createBufferSource();s.buffer=b;s.connect(c.destination);s.start(0)}catch(e){}}
-  try{el.src=SILENT;el.play().then(()=>el.pause()).catch(()=>{})}catch(e){}
-}
-function setVol(v){vol=v;if(gain)gain.gain.value=v;try{el.volume=v}catch(e){}}
-$("vol").addEventListener("input",e=>{setVol(e.target.value/100);$("volv").textContent=e.target.value+" %"});
-
-const decode=ab=>new Promise((res,rej)=>{const p=ctx.decodeAudioData(ab,res,rej);if(p&&p.then)p.then(res,rej)});
-
-async function prepare(s){
-  if(!s||s.ready)return s;
-  s.ready=true;
-  try{
-    const ac=new AbortController();const to=setTimeout(()=>ac.abort(),12000);
-    const r=await fetch(s.url,{signal:ac.signal});clearTimeout(to);
-    if(!r.ok)throw new Error("http");
-    const ab=await r.arrayBuffer();
-    if(ensureCtx()){try{s.buf=await decode(ab)}catch(e){}}
-    if(!s.buf)s.blobUrl=URL.createObjectURL(new Blob([ab],{type:"audio/mp4"}));
-  }catch(e){/* CORS/offline -> direkte URL nutzen */}
-  return s;
-}
-function stopAudio(){
-  clearTimeout(stopT);
-  if(node){try{node.onended=null;node.stop()}catch(e){}try{node.disconnect()}catch(e){}node=null}
-  try{el.pause()}catch(e){}
-  $("play").classList.remove("playing");
-}
-function armEl(s){
-  const want=s.blobUrl||s.url;
-  if(el.dataset.want!==want){el.dataset.want=want;el.src=want;try{el.load()}catch(e){}}
-}
-function playSnippet(len){
-  unlock();stopAudio();
-  const s=cur;if(!s)return;
-  if(s.buf&&ensureCtx()){
-    ctx.resume().catch(()=>{});
-    node=ctx.createBufferSource();node.buffer=s.buf;node.connect(gain);
-    node.onended=()=>{$("play").classList.remove("playing");node=null};
-    try{node.start(0,0,len)}catch(e){node=null;return err()}
-    $("play").classList.add("playing");return;
-  }
-  armEl(s);
-  const go=()=>{
-    try{el.currentTime=0}catch(e){}
-    el.play().then(()=>{
-      $("play").classList.add("playing");
-      stopT=setTimeout(()=>{el.pause();$("play").classList.remove("playing")},len*1000+40);
-    }).catch(err);
-  };
-  if(el.readyState>=2)go();
-  else{
-    $("feed").textContent="Snippet lädt…";$("feed").className="feed";
-    let fired=false;
-    const on=()=>{if(fired)return;fired=true;el.removeEventListener("canplay",on);
-      if($("feed").textContent==="Snippet lädt…"){$("feed").textContent=""}go()};
-    el.addEventListener("canplay",on);
-    setTimeout(on,5000);
-  }
-}
-function playFull(){
-  unlock();stopAudio();
-  const s=cur;if(!s)return;
-  if(s.buf&&ensureCtx()){
-    ctx.resume().catch(()=>{});
-    node=ctx.createBufferSource();node.buffer=s.buf;node.connect(gain);
-    node.onended=()=>{node=null};
-    try{node.start(0)}catch(e){node=null}
-    return;
-  }
-  armEl(s);try{el.currentTime=0}catch(e){}el.play().catch(()=>{});
-}
-function err(){$("feed").textContent="Ton lässt sich nicht abspielen – Stummschalter prüfen.";$("feed").className="feed bad"}
-const REGNAME={de:"Deutsch",rap:"Deutschrap",global:"Global"};
-const label=()=>REGNAME[region]+" · "+tier[0].toUpperCase()+tier.slice(1);
+let region="de",tier="easy",songs=[],idx=0,total=0,log=[],cur=null,stepI=0,stepMax=0,penalty=0,done=false,raf=null;
+const audio=new Audio();audio.preload="auto";audio.volume=.5;
+$("vol").addEventListener("input",e=>{audio.volume=e.target.value/100;$("volv").textContent=e.target.value+" %"});
+const label=()=>(region==="de"?"Deutsch":"Global")+" · "+tier[0].toUpperCase()+tier.slice(1);
 
 $("menubtn").onclick=()=>$("home").click();
-$("start").onclick=()=>{unlock();$("menubtn").style.display="";$("intro").classList.add("hidden");$("stage").classList.remove("hidden");$("scorebox").style.visibility="visible";loadTier()};
-$("home").onclick=()=>{stopAudio();$("menubtn").style.display="none";$("stage").classList.add("hidden");$("intro").classList.remove("hidden");$("scorebox").style.visibility="hidden"};
+$("start").onclick=()=>{$("menubtn").style.display="";$("intro").classList.add("hidden");$("stage").classList.remove("hidden");$("scorebox").style.visibility="visible";loadTier()};
+$("home").onclick=()=>{audio.pause();$("menubtn").style.display="none";$("stage").classList.add("hidden");$("intro").classList.remove("hidden");$("scorebox").style.visibility="hidden"};
 $("tiers").addEventListener("click",e=>{const b=e.target.closest(".tier");if(!b)return;[...$("tiers").children].forEach(x=>x.classList.toggle("on",x===b));tier=b.dataset.t});
 $("region").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;[...$("region").children].forEach(x=>x.classList.toggle("on",x===b));region=b.dataset.r});
 $("impbtn").onclick=()=>$("modal").classList.add("open");
 $("impclose").onclick=()=>$("modal").classList.remove("open");
 $("modal").addEventListener("click",e=>{if(e.target===$("modal"))$("modal").classList.remove("open")});
 
-function loadMsg(t){$("load").innerHTML=t}
-let cdT=null;
-function loadFail(t){
-  clearInterval(cdT);
-  $("load").innerHTML=t+'<div class="retry"><button class="btn" id="retry">Nochmal versuchen</button></div>';
-  const btn=$("retry");btn.onclick=()=>{clearInterval(cdT);loadTier()};
-  const tick=()=>{const s=blockedFor();
-    if(s>0){btn.disabled=true;btn.style.opacity=".5";btn.textContent=`Noch ${s} s warten`}
-    else{clearInterval(cdT);btn.disabled=false;btn.style.opacity="";btn.textContent="Nochmal versuchen";
-      if(!document.hidden)loadTier()}};
-  tick();if(blockedFor()>0)cdT=setInterval(tick,1000);
-}
 async function loadTier(){
-  stopAudio();
   $("load").classList.remove("hidden");$("game").classList.add("hidden");$("result").classList.add("hidden");
-  const pool=[...POOLS[region][tier]].sort(()=>Math.random()-.5).slice(0,12)
-    .sort((a,b)=>(cached(a.replace("|"," "))?0:1)-(cached(b.replace("|"," "))?0:1));
-  const found=[],seen=new Set();let fails=0;const why={timeout:0,jsonp:0};
-  for(const p of pool){
-    if(found.length>=5)break;
-    loadMsg(`Songs werden gesucht…<br><small>${found.length} / 5</small>`);
+  const pick=[...POOLS[region][tier]].sort(()=>Math.random()-.5).slice(0,8),found=[];
+  for(const p of pick){
     const [artist,title]=p.split("|");
-    try{
-      const r=await search(`${artist} ${title}`,5);
-      const h=r.find(x=>x.previewUrl&&norm(x.trackName).includes(norm(title).split(" ")[0]))||r.find(x=>x.previewUrl);
-      if(h&&!seen.has(norm(h.trackName))){seen.add(norm(h.trackName));
-        found.push({artist:h.artistName,title:h.trackName,key:norm(h.trackName),akey:norm(h.artistName),
-          url:h.previewUrl,link:h.trackViewUrl||"",art:(h.artworkUrl100||"").replace("100x100","300x300")});}
-    }catch(e){why[e&&e.message==="timeout"?"timeout":"jsonp"]++;fails++;
-      if(fails===1){await new Promise(r=>setTimeout(r,1200))}
-      if(fails>=4)break}
+    try{const r=await search(`${artist} ${title}`,5);
+      const hit=r.find(x=>x.previewUrl&&norm(x.trackName).includes(norm(title).split(" ")[0]))||r.find(x=>x.previewUrl);
+      if(hit)found.push({artist:hit.artistName,title:hit.trackName,key:norm(hit.trackName),akey:norm(hit.artistName),url:hit.previewUrl,link:hit.trackViewUrl||"",art:hit.artworkUrl100.replace("100x100","300x300")});
+    }catch(e){}
+    if(found.length===5)break;
   }
   songs=found;idx=0;total=0;log=[];$("total").textContent="0";
-  if(!songs.length){
-    const diag=why.timeout>why.jsonp
-      ? 'Die Anfragen laufen ins Leere.<br><small>Sieht nach langsamer oder gefilterter Verbindung aus (Werbeblocker, Schul-WLAN, VPN?).</small>'
-      : 'Apple blockt die Anfragen gerade.<br><small>Meist das Anfragelimit. Warte etwa eine Minute, dann geht es wieder.</small>';
-    loadFail(fails?diag+`<small class="diag">Timeouts: ${why.timeout} · Blockiert: ${why.jsonp}</small>`
-                  :'Keine Songs gefunden.<br><small>Probier eine andere Kategorie.</small>');
-    return;}
-  loadMsg("Snippet wird vorbereitet…");
-  await prepare(songs[0]);
-  songs.slice(1).reduce((p,x)=>p.then(()=>prepare(x)),Promise.resolve());
+  if(!songs.length){$("load").textContent="Keine Songs geladen – Verbindung prüfen.";return}
   $("load").classList.add("hidden");$("game").classList.remove("hidden");startRound();
 }
 function startRound(){
-  cur=songs[idx];stepI=0;stepMax=0;penalty=0;done=false;stopAudio();
-  prepare(cur).then(()=>{if(cur&&!cur.buf)armEl(cur)});
-  if(songs[idx+1])prepare(songs[idx+1]);
+  cur=songs[idx];stepI=0;stepMax=0;penalty=0;done=false;audio.src=cur.url;audio.load();
   $("rnd").textContent=`Song ${idx+1} / ${songs.length}`;$("lvl").textContent=label();
   $("inp").value="";$("inp").disabled=false;$("feed").textContent="";$("feed").className="feed";
   $("after").classList.remove("on");$("actions").style.display="";$("inp").parentElement.style.display="";$("sugg").classList.remove("open");
   renderSteps();updateWorth();
 }
 function renderSteps(){$("steps").innerHTML=STEPS.map((s,i)=>`<div class="step ${i<=stepMax?"used":""} ${i===stepI?"cur":""}" data-i="${i}">${String(s).replace(".",",")}</div>`).join("")}
-const effStep=()=>Math.max(stepMax,stepI);
-function updateWorth(){$("worth").textContent=fmt(Math.max(0,worthOf(STEPS[effStep()])-penalty));$("len").textContent=sec(STEPS[stepI])}
-/* Stufe antippen wählt nur aus – abgespielt wird erst per Play-Button */
-$("steps").addEventListener("click",e=>{const t=e.target.closest(".step");if(!t||done)return;stepI=+t.dataset.i;renderSteps();updateWorth()});
-function play(){stepMax=Math.max(stepMax,stepI);renderSteps();updateWorth();playSnippet(STEPS[stepI])}
+function updateWorth(){$("worth").textContent=fmt(Math.max(0,worthOf(STEPS[stepMax])-penalty));$("len").textContent=sec(STEPS[stepI])}
+$("steps").addEventListener("click",e=>{const t=e.target.closest(".step");if(!t||done)return;stepI=+t.dataset.i;stepMax=Math.max(stepMax,stepI);renderSteps();updateWorth();cancelAnimationFrame(raf);audio.pause();audio.currentTime=0;$("play").classList.remove("playing")});
+function play(){
+  cancelAnimationFrame(raf);audio.pause();audio.currentTime=0;const len=STEPS[stepI],p=$("play");
+  audio.play().then(()=>{p.classList.add("playing");const st=performance.now();
+    const tick=()=>{if(performance.now()-st>=len*1000){audio.pause();p.classList.remove("playing");return}raf=requestAnimationFrame(tick)};raf=requestAnimationFrame(tick);
+  }).catch(()=>{$("feed").textContent="Preview lässt sich nicht abspielen.";$("feed").className="feed bad"});
+}
 $("play").onclick=()=>!done&&play();
 let deb=null,list=[],hl=-1;
-$("inp").addEventListener("input",()=>{clearTimeout(deb);const q=$("inp").value.trim();if(q.length<3){$("sugg").classList.remove("open");return}
-  deb=setTimeout(async()=>{if(blockedFor()>0)return;try{list=(await search(q,6)).filter(x=>x.trackName)}catch(e){return}hl=-1;
+$("inp").addEventListener("input",()=>{clearTimeout(deb);const q=$("inp").value.trim();if(q.length<2){$("sugg").classList.remove("open");return}
+  deb=setTimeout(async()=>{list=(await search(q,6)).filter(x=>x.trackName);hl=-1;
     $("sugg").innerHTML=list.map((x,i)=>`<button data-i="${i}"><img src="${x.artworkUrl60}" alt=""><div>${x.trackName}<small>${x.artistName}</small></div></button>`).join("");
-    $("sugg").classList.toggle("open",list.length>0)},450)});
+    $("sugg").classList.toggle("open",list.length>0)},260)});
 $("inp").addEventListener("keydown",e=>{if(!$("sugg").classList.contains("open"))return;
   if(e.key==="ArrowDown")hl=Math.min(hl+1,list.length-1);else if(e.key==="ArrowUp")hl=Math.max(hl-1,0);
   else if(e.key==="Enter"){e.preventDefault();guess(list[Math.max(hl,0)]);return}else return;
@@ -568,20 +282,20 @@ document.addEventListener("click",e=>{if(!e.target.closest(".guess"))$("sugg").c
 function guess(g){if(!g||done)return;$("sugg").classList.remove("open");$("inp").value="";
   const t=norm(g.trackName),a=norm(g.artistName);
   const ok=(t===cur.key||t.includes(cur.key)||cur.key.includes(t))&&(a.split(" ")[0]===cur.akey.split(" ")[0]||a.includes(cur.akey)||cur.akey.includes(a));
-  if(ok)finish(Math.max(0,worthOf(STEPS[effStep()])-penalty),true);
+  if(ok)finish(Math.max(0,worthOf(STEPS[stepMax])-penalty),true);
   else{penalty+=500;updateWorth();$("feed").textContent=`Nope – „${g.trackName}“ war's nicht. −500`;$("feed").className="feed bad"}}
 $("skip").onclick=()=>!done&&finish(0,false);
-function finish(pts,won){done=true;stopAudio();
+function finish(pts,won){done=true;cancelAnimationFrame(raf);audio.pause();$("play").classList.remove("playing");
   total+=pts;$("total").textContent=fmt(total);log.push({title:cur.title,artist:cur.artist,pts,won});
   $("rimg").src=cur.art;$("rtitle").textContent=cur.title;$("rartist").textContent=cur.artist;$("rlink").href=cur.link;$("rpts").textContent=(won?"+":"")+fmt(pts);
-  const W=["TOLL GEMACHT!","STARK!","OHREN WIE EIN LUCHS!","KRASS, BEI "+sec(STEPS[effStep()])+"!","DAS WAR SAUBER!"],M=["KNAPP DANEBEN.","NÄCHSTES MAL!","DEN KENNST DU JETZT."];
+  const W=["TOLL GEMACHT!","STARK!","OHREN WIE EIN LUCHS!","KRASS, BEI "+sec(STEPS[stepMax])+"!","DAS WAR SAUBER!"],M=["KNAPP DANEBEN.","NÄCHSTES MAL!","DEN KENNST DU JETZT."];
   const last=idx===songs.length-1;
-  $("shout").textContent=won?(effStep()===0?"WAS?! BEI 0,1 SEKUNDEN!":W[Math.floor(Math.random()*W.length)]):M[Math.floor(Math.random()*M.length)];
+  $("shout").textContent=won?(stepMax===0?"WAS?! BEI 0,1 SEKUNDEN!":W[Math.floor(Math.random()*W.length)]):M[Math.floor(Math.random()*M.length)];
   $("shout").className="shout"+(won?"":" miss");
   $("sub").textContent=last?"Das war der letzte – bereit für dein Ergebnis?":"Bereit für den nächsten Song?";
   $("next").textContent=last?"Ergebnis ▶":"Weiter ▶";
-  $("feed").textContent="";$("inp").disabled=true;$("inp").parentElement.style.display="none";$("actions").style.display="none";$("after").classList.add("on");playFull()}
-$("next").onclick=()=>{stopAudio();idx++;idx<songs.length?startRound():showResult()};
+  $("feed").textContent="";$("inp").disabled=true;$("inp").parentElement.style.display="none";$("actions").style.display="none";$("after").classList.add("on");audio.currentTime=0;audio.play().catch(()=>{})}
+$("next").onclick=()=>{audio.pause();idx++;idx<songs.length?startRound():showResult()};
 function showResult(){$("game").classList.add("hidden");$("result").classList.remove("hidden");$("rtotal").textContent=fmt(total);
   $("rsub").textContent=`${log.filter(l=>l.won).length} von ${log.length} erkannt · ${label()}`;
   $("log").innerHTML=log.map(l=>`<div><span>${l.won?"✓":"✗"} ${l.title} – ${l.artist}</span><span>${fmt(l.pts)}</span></div>`).join("")}
