@@ -175,6 +175,29 @@ footer a{color:var(--sky);cursor:pointer;text-decoration:underline;text-underlin
 #mlock .pc .ic{font-size:26px;flex:none}
 #mlock .pc small{display:block;color:var(--dim);font-size:12px;margin-top:2px}
 #mlock .pc strong{font:900 14px Rubik;color:var(--chalk)}
+#mlock .ask{margin-top:4px;font-family:"Permanent Marker",cursive;font-size:16px;color:var(--chalk);
+  transform:rotate(-1deg)}
+#mlock .mailbtn{display:flex;align-items:center;gap:12px;max-width:340px;text-decoration:none;
+  background:var(--lime);color:#111;border:3px solid #000;box-shadow:5px 5px 0 #000;
+  padding:14px 18px;transform:rotate(-1.5deg);transition:.12s;position:relative;overflow:hidden}
+#mlock .mailbtn:hover{transform:rotate(-1.5deg) translate(-2px,-2px);box-shadow:7px 7px 0 #000}
+#mlock .mailbtn:active{transform:rotate(-1.5deg) translate(3px,3px);box-shadow:2px 2px 0 #000}
+#mlock .mailbtn .ic{flex:none;animation:mailWob 2.8s ease-in-out infinite}
+@keyframes mailWob{0%,100%{transform:rotate(-8deg)}50%{transform:rotate(8deg)}}
+#mlock .mailbtn strong{display:block;font:900 15px Rubik;letter-spacing:.01em}
+#mlock .mailbtn small{display:block;font:500 12px Rubik;color:#2c3a08;margin-top:2px;word-break:break-all}
+#mlock .dcbtn{display:flex;align-items:center;gap:12px;max-width:340px;text-decoration:none;
+  background:var(--sky);color:#111;border:3px solid #000;box-shadow:5px 5px 0 #000;
+  padding:12px 18px;transform:rotate(1deg);transition:.12s}
+#mlock .dcbtn:hover{transform:rotate(1deg) translate(-2px,-2px);box-shadow:7px 7px 0 #000}
+#mlock .dcbtn:active{transform:rotate(1deg) translate(3px,3px);box-shadow:2px 2px 0 #000}
+#mlock .dcbtn .ic{flex:none}
+#mlock .dcbtn strong{display:block;font:900 14px Rubik}
+#mlock .dcbtn small{display:block;font:500 11px Rubik;color:#0b2c38;margin-top:1px}
+@media (prefers-reduced-motion:reduce){#mlock .mailbtn .ic{animation:none}}
+#mlock .mailbtn .ic,#mlock .dcbtn .ic{width:30px;height:auto}
+.box .clink .ic{width:24px;height:auto;flex:none}
+.box .clink{align-items:center}
 #mlock .foot{margin-top:6px;font-size:11px;color:var(--dim)}
 #mlock .foot .brand{font-family:"Permanent Marker",cursive;font-size:14px;color:var(--chalk)}
 @media (max-width:820px){
@@ -207,9 +230,24 @@ footer a{color:var(--sky);cursor:pointer;text-decoration:underline;text-underlin
       <span class="ic">&#128187;</span>
       <div>
         <strong>Am PC oder Laptop spielen</strong>
-        <small>spraylist.de im Browser &ouml;ffnen</small>
+        <small>spraylist.party im Browser &ouml;ffnen</small>
       </div>
     </div>
+    <div class="ask">Fragen? Schreib mir!</div>
+    <a class="mailbtn" href="mailto:canooservice@gmail.com?subject=SPRAYLIST">
+      <svg class="ic" viewBox="0 0 32 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="2" y="2" width="28" height="20" rx="3" fill="#fff" stroke="#000" stroke-width="2.6"/><path d="M3.5 4.5 16 14 28.5 4.5" fill="none" stroke="#000" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span>
+        <strong>E-Mail schreiben</strong>
+        <small>canooservice@gmail.com</small>
+      </span>
+    </a>
+    <a class="dcbtn" href="https://discord.gg/6MGQeGazGR" target="_blank" rel="noopener">
+      <svg class="ic" viewBox="0 0 32 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M4 3h24a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H13l-7 5v-5H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z" fill="#fff" stroke="#000" stroke-width="2.6" stroke-linejoin="round"/><circle cx="11" cy="10.5" r="1.9" fill="#000"/><circle cx="16" cy="10.5" r="1.9" fill="#000"/><circle cx="21" cy="10.5" r="1.9" fill="#000"/></svg>
+      <span>
+        <strong>Discord beitreten</strong>
+        <small>discord.gg/6MGQeGazGR</small>
+      </span>
+    </a>
     <div class="foot"><span class="brand">CanooStudio</span><sup>&reg;</sup></div>
   </div>
 </div>
@@ -304,8 +342,8 @@ footer a{color:var(--sky);cursor:pointer;text-decoration:underline;text-underlin
     <p><b>Anbieter</b>Can Delibasi<br>Ludgerweg 184<br>42329 Wuppertal<br>Deutschland</p>
     <p><b>Kontakt</b></p>
     <div class="clinks">
-      <a class="clink mail" href="mailto:support@spraylist.de">&#9993;&#65039; E-Mail schreiben<small>support@spraylist.de</small></a>
-      <a class="clink dc" href="https://discord.gg/6MGQeGazGR" target="_blank" rel="noopener">&#128172; Discord beitreten<small>discord.gg/6MGQeGazGR</small></a>
+      <a class="clink mail" href="mailto:canooservice@gmail.com"><svg class="ic" viewBox="0 0 32 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="2" y="2" width="28" height="20" rx="3" fill="#fff" stroke="#000" stroke-width="2.6"/><path d="M3.5 4.5 16 14 28.5 4.5" fill="none" stroke="#000" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg> <span>E-Mail schreiben<small>canooservice@gmail.com</small></span></a>
+      <a class="clink dc" href="https://discord.gg/6MGQeGazGR" target="_blank" rel="noopener"><svg class="ic" viewBox="0 0 32 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M4 3h24a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H13l-7 5v-5H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z" fill="#fff" stroke="#000" stroke-width="2.6" stroke-linejoin="round"/><circle cx="11" cy="10.5" r="1.9" fill="#000"/><circle cx="16" cy="10.5" r="1.9" fill="#000"/><circle cx="21" cy="10.5" r="1.9" fill="#000"/></svg> <span>Discord beitreten<small>discord.gg/6MGQeGazGR</small></span></a>
     </div>
     <p><b>Verantwortlich für den Inhalt</b>Can Delibasi (Anschrift wie oben)</p>
     <p><b>Musik-Previews</b>Alle Hörproben werden direkt von Apple (iTunes Search API) gestreamt und sind offizielle 30-Sekunden-Previews der Rechteinhaber. Diese Seite hostet keine Musikdateien. Alle Titel, Artworks und Markennamen gehören ihren jeweiligen Eigentümern.</p>
